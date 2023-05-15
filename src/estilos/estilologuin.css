@@ -1,0 +1,11 @@
+.estilologuin{
+    width: 30%;
+    min-height: 100%;
+    background-color: #ffc107;
+    margin-left: 60%;
+    margin-top: 17%;
+    box-shadow: 7px 13px 37px #ffc107;
+    padding: 20px 30px;
+    border-top: 2px solid #ffffff;
+    color: rgb(0, 0, 0);
+}
