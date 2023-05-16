@@ -1,48 +1,53 @@
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Button } from 'react-bootstrap';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link , useNavigate } from "react-router-dom";
 
 export function Barra_opciones() {
   const navigate = useNavigate();
     return(
-       
-        <Navbar bg="dark" variant="dark" >
-          <Container >
-            <Navbar.Brand >Proyecto de grado</Navbar.Brand>
-            <Nav  >
-              <Button
-              style={{marginLeft:5,marginRight:5, marginTop:10, marginBottom:10}}
-              variant='warning'
-              onClick={() => navigate("/home")}
-              >Home</Button>
-              <Button
-              style={{marginLeft:5,marginRight:5, marginTop:10, marginBottom:10}}
-              variant='warning'
-              onClick={() => navigate("/crear/pregunta")}
-              >Crear Pregunta</Button>
-              <Button
-              style={{marginLeft:5,marginRight:5, marginTop:10, marginBottom:10}}
-              variant='warning'
-              onClick={()=> navigate("/registro/alumnos")}
-              >Registrar Alumno</Button>
-              <Button
-              style={{marginLeft:5,marginRight:5, marginTop:10, marginBottom:10}}
-              variant='warning'
-              onClick={()=> navigate("/ver/ranking")}
-              >Ver Ranking</Button>
+     
+           <Navbar bg="dark" expand="lg">
+ 
+          <Container fluid>
+<Navbar.Brand>Proyecto de grado</Navbar.Brand>
+<Navbar.Toggle aria-controls="navbarScroll" />
+  <Navbar.Collapse>
+  <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+    <Nav.Link onClick={() => navigate("/home")}>Home</Nav.Link>
+    <Nav.Link onClick={() => navigate("/crear/pregunta")}>Crear Pregunta</Nav.Link>
+    <Nav.Link onClick={() => navigate("/ver/ranking")}>Ver Ranking</Nav.Link>
+    <NavDropdown title="Estudiantes" >
+              <NavDropdown.Item onClick={() => navigate("/registro/alumnos")}>
+                Registrar Estudiante</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate("/revisar/alumnos")}>
+                Revisar Estudiante</NavDropdown.Item>
+                <NavDropdown.Divider />
+              <NavDropdown.Item onClick={() => navigate("/eliminar/alumnos")} >
+                Eliminar Estudiante</NavDropdown.Item>
               
-            </Nav>
-            <Navbar.Collapse 
-            className="justify-content-end">
-            <Button 
-            variant="outline-warning"
-            onClick={()=> navigate("/")}
-            >Log out</Button>
-          </Navbar.Collapse>
+              
+            </NavDropdown>
+
+
+
+
+
+  </Nav>
+
+  </Navbar.Collapse>
+
           </Container>
-        </Navbar>
+           </Navbar>
+           
+      
         
        
         
