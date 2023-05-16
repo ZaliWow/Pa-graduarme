@@ -10,7 +10,7 @@ export function Barra_opciones() {
   const navigate = useNavigate();
     return(
      
-           <Navbar bg="dark" expand="lg">
+           <Navbar bg="secondary" expand="lg">
  
           <Container fluid>
 <Navbar.Brand>Proyecto de grado</Navbar.Brand>
@@ -32,20 +32,16 @@ export function Barra_opciones() {
                 <NavDropdown.Divider />
               <NavDropdown.Item onClick={() => navigate("/eliminar/alumnos")} >
                 Eliminar Estudiante</NavDropdown.Item>
-              
-              
-            </NavDropdown>
-
-
-
-
-
+                
+   </NavDropdown>
+   
   </Nav>
-
   </Navbar.Collapse>
-
-          </Container>
-           </Navbar>
+<Form className="d-flex">
+<Button variant="outline-dark">Log out</Button>
+</Form>
+</Container>
+</Navbar>
            
       
         
