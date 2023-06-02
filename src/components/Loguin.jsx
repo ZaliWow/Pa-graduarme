@@ -1,14 +1,26 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../estilos/estilologuin.css'
+import { Errores } from '../components/errores';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import  axios  from 'axios';
-export  function Loguin() {
+import { Container } from 'react-bootstrap';
+export  function Loguin({
+  setLogueado,
+  setUsuario,
+  user
+}) {
+  
+
+
   const  [correoEstudiante, setCorreoEstudiante]=useState('')
   const [contraEstudiante, setContraEstudiante]=useState('')
-  const [error, setError]=useState('')
- const params = useParams()
+  const[pruebaUsuario, setPruebaUsuario]=useState("")
+  
+  const [error, setError]=useState(false)
+//Hook de navegacion  
+const navigate =useNavigate()
  
 // controlador de correos
 const handlecorreo= (e)=>{
@@ -21,19 +33,37 @@ const handlecontra= (e)=>{
 setContraEstudiante(e.target.value)
 
 }
+const handleInfo = (e)=>{
+  e.preventDefault()
+  navigate('/')
+}
+const loguearse =(e)=>{
+  e.preventDefault()
+  navigate('/home')
+  setLogueado(true)
+}
 const handleSubmit = async(e)=>{
   e.preventDefault()
+  
  try {
-  const res = await axios.get('http://localhost:4000/registro/estudiantes',{
-  correo_estudiante: correoEstudiante,
-  contra_estudiante: contraEstudiante
-  })  
+  const res = await axios.get('http://localhost:4000/registro/estudiantes')  
   for(let i=0;res.data.length > i; i++){
     if(res.data[i].correo_estudiante === correoEstudiante && res.data[i].contra_estudiante === contraEstudiante)
     {
-      console.log('por fin logueaste hijo de la re mil putas que te re mil pario')
+      setLogueado(true)
+      navigate('/home')
+      setUsuario({...user, 
+        id_estudiante: res.data[i].id_estudiante,
+        puntaje_estudiante:res.data[i].puntaje_estudiante,
+        correo_estudiante:res.data[i].correo_estudiante,
+        nombre_estudiante:res.data[i].nombre_estudiante,
+        apellido_estudiante:res.data[i].apellido_estudiante,
+      
+      
+      })
+      
     }else{
-      console.log('Usuario o contraseña incorrecto')
+      setError(true)
     }
   }
   
@@ -41,16 +71,14 @@ const handleSubmit = async(e)=>{
   console.log(error)
  }
 }
-
-useEffect(()=>{
-  
-})
-
-
   return (
+    <div >
+      
+      <Errores errors={error} setError={setError}/>
+      <div className='estilologuin'>
     <Form 
     onSubmit={handleSubmit}
-    className='estilologuin'>
+    >
     <Form.Group 
     className="mb-3" 
     controlId="formBasicEmail">
@@ -62,7 +90,7 @@ useEffect(()=>{
       placeholder="Enter email" />
       <Form.Text 
       className="text-muted">
-        We'll never share your email with anyone else.
+        Ingresa los datos proporcionados por la institucion
       </Form.Text>
     </Form.Group>
 
@@ -86,6 +114,13 @@ useEffect(()=>{
     >
       Log in!
     </Button>
+
+    <Button variant="outline-dark" onClick={loguearse}>
+      Back
+    </Button>
   </Form>
+  </div>
+  </div>
   )
+  
 }

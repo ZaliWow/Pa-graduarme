@@ -7,22 +7,50 @@ import { Home } from "./components/Home";
 import { Crear_Pregunta } from './components/Crear_Pregunta';
 import { Bienvenido } from './components/Bienvenido';
 import {Ver_ranking} from './components/Ver_ranking';
-import { Info_inicio } from "./components/Info_inicio";
+
+import { useState } from 'react';
 function App() {
+  const [logueado, setLogueado]=useState(false)
+  const[usuario, setUsuario]=useState({
+    id_estudiante: "",
+    puntaje_estudiante:"",
+    correo_estudiante:"",
+    nombre_estudiante:"",
+    apellido_estudiante:"",
+  })
+    
   return (
+  
+    
    <BrowserRouter>
-   <Bienvenido/>
-   <Barra_opciones/>
+  <Barra_opciones 
+    setLogueado={setLogueado}
+    Logueado ={logueado}
+    /> 
    <Routes>
-    <Route path='/' element={<Info_inicio/>}></Route>
-    <Route path="/loguin" element={<Loguin/>}></Route>
-    <Route path="/registro/alumnos" element={<Registro_Estudiantes/>}></Route>
-    <Route path="/home" element={<Home/>}></Route>
-    <Route path="/crear/pregunta" element={<Crear_Pregunta/>}></Route>
-    <Route path="/ver/ranking" element={<Ver_ranking/>}></Route>
+    <Route
+    path='/'
+    element={<Bienvenido Logueado={logueado}/>}>
+    </Route>
+    <Route 
+    path="/loguin" 
+    element={<Loguin setLogueado={setLogueado} setUsuario={setUsuario} user={usuario}/>}
+    ></Route>
+    <Route 
+    path="/registro/alumnos" 
+    element={<Registro_Estudiantes Logueado={logueado}/>}></Route>
+    <Route 
+    path="/home" 
+    element={<Home user={usuario} Logueado={logueado}/>}></Route>
+    <Route 
+    path="/crear/pregunta" 
+    element={<Crear_Pregunta Logueado={logueado}/>}></Route>
+    <Route 
+    path="/ver/ranking" 
+    element={<Ver_ranking Logueado={logueado}/>}></Route>
    </Routes>
    </BrowserRouter>
-   
+ 
   )
 }
 

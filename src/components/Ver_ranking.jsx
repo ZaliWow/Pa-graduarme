@@ -1,6 +1,10 @@
 import Table from 'react-bootstrap/Table';
 import '../estilos/estiloranking.css'
-export function Ver_ranking() {
+import { No_loguin } from "./No_loguin"
+export function Ver_ranking({Logueado}) {
+  if(Logueado===false)return (
+    <No_loguin />
+  )
     return(
         <div className='estiloranking'>
         <Table striped bordered hover>

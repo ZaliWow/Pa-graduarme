@@ -2,8 +2,12 @@ import { Form } from "react-bootstrap"
 import Button from "react-bootstrap/Button"
 import '../estilos/estiloregistro.css'
 import { useState, useEffect } from "react"
+import { No_loguin } from "./No_loguin"
 import { useNavigate } from "react-router-dom"
-export  function Registro_Estudiantes() {
+export  function Registro_Estudiantes({Logueado}) {
+  if(Logueado===false)return (
+    <No_loguin />
+  )
 
   //PARA LAS REDIRECCIONES
   const navigate = useNavigate();

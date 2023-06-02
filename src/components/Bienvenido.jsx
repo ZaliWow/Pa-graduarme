@@ -1,29 +1,29 @@
+import {Info_inicio} from "./Info_inicio"
 import { Navbar } from "react-bootstrap"
 import Container from "react-bootstrap/Container"
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import "../estilos/bienvenido.css"
 
-
-export function Bienvenido() {
+export function Bienvenido({Logueado}) {
+    if(Logueado===true)return null;
     const navigate = useNavigate()
     return(
         <>
-        <Navbar bg="dark"> 
+        <Navbar expand="lg" bg="dark" variant="dark"> 
             <Container>
             <Navbar.Brand 
-            style={{color:'white'}}>Bienvenido al proyecto de grado de David Morales
+            style={{color:'white'}}>Bienvenido
             </Navbar.Brand>
-            
-            <Navbar.Collapse 
-            className="justify-content-end">
             <Button 
-            variant="outline-warning"
+             className="justify-content-end"
+            variant="outline-secondary"
             onClick={()=> navigate("/loguin")}
             >Log in</Button>
-          </Navbar.Collapse>
+          
             </Container>
         </Navbar>
-        
+        <Info_inicio />
 
          </>
     )

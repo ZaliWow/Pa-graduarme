@@ -1,7 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
 export  function Recomendaciones() {
   return (
-    <Carousel>
+    <Carousel lg="expand">
       <Carousel.Item>
         <img
           className="d-block w-100"

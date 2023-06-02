@@ -1,5 +1,69 @@
 .estiloinfoinicio{
+    display: grid;
+    place-items: center;
+    justify-content:flex-start;
     margin-top: 5%;
     margin-left: 2%;
     margin-right: 4%;
+    
+}
+
+@media screen and (max-width: 100px){
+    .estiloinfoinicio_img{
+        height: 10%;
+        justify-items: center;
+        grid-column: auto;
+        
+
+
+    }}
+
+
+h1{
+    margin-top: 80px;
+}
+h5{
+   
+    margin-top:40px;
+    margin-left: 10%;
+    margin-right: 30%;
+    
+}
+
+.sobre_nosotros_inicio{
+    text-align: center;
+    margin-top:40px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.bienvenido_inicio{
+    margin-right: 20%;
+}
+.redes_info_inicio{
+ display: flex;
+ flex-wrap: wrap;
+ border-top: 3% ;
+    
+}
+@media screen and (max-width: 100px){
+    .redes_info_inicio{
+        right: 100%;
+        
+
+
+    }}
+.footer {
+    height: 60vh;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+.iconos{
+    display: flex;
+    flex-direction: row;
+   
+}
+.iconos_espaciados{
+padding:10px;
 }
