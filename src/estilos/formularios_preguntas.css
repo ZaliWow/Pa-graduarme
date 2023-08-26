@@ -1,4 +1,4 @@
-.estiloregistro{
+.FormularioPreguntas{
     position: relative;
     width: 40%;
     min-height: 100%;
@@ -12,7 +12,7 @@
     
 }
 @media screen and (max-width: 480px){
-    .estiloregistro{
+    .FormularioPreguntas{
         width: 80%;
         margin-left:10%;
         margin-right:10% ;

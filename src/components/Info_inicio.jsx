@@ -1,12 +1,6 @@
 import Alert from 'react-bootstrap/Alert';
 import  "../estilos/estiloinfoinicio.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram,
-  faTwitter,
-  faFacebook,
-  faGithub
 
-} from '@fortawesome/free-brands-svg-icons';
 
 export function Info_inicio() {
     return(
@@ -44,13 +38,7 @@ export function Info_inicio() {
        <br />
        <h1>Redes Sociales</h1>
        <br />
-       <div className='iconos'>
-       <FontAwesomeIcon icon={faInstagram} beat size='3x' className='iconos_espaciados'/>
-       <FontAwesomeIcon icon={faTwitter} beat size='3x'className='iconos_espaciados'/>
-       <FontAwesomeIcon icon={faFacebook} beat size='3x'className='iconos_espaciados'/>
-       <FontAwesomeIcon icon={faGithub} beat size='3x'className='iconos_espaciados'/>
       
-       </div>
        
        </div>
        

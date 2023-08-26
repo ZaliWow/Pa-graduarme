@@ -25,12 +25,17 @@ export  function Registro_Estudiantes({Logueado}) {
   // PARA CONTROLAR EL SUBMIT DEL FORMULARIO
   const handleSubmit = async (e)=>{
   e.preventDefault()
-   const res = await fetch('http://localhost:4000/registro/estudiantes',{
+  try {
+    const res = await fetch('http://localhost:4000/registro/estudiantes',{
       method:'POST',
       body: JSON.stringify(inputEstudiante),
       headers:{"Content-Type":"application/json"}
     })
- navigate('/home')
+    navigate('/home')
+  } catch (error) {
+    console.log("error")
+  }
+  
   }
 
   // PARA LOS CAMBIOS DENTRO DE LOS IMPUTS

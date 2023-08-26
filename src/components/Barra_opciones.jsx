@@ -6,49 +6,25 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
 import {Link , useNavigate } from "react-router-dom";
+import { Barra_Docente } from './Barra_Docente';
+import { Barra_Estudiante } from './Barra_Estudiante';
 
 export function Barra_opciones({
   setLogueado,
-  Logueado
+  Logueado,
+  PermisoDocente
 }) {
 if(Logueado === false)return null;
-const handleLogout = (e)=>{
- setLogueado(false)
- navigate("/")
-}
-const navigate = useNavigate();
 
-return (
-  <Navbar bg="dark" color="white" expand="lg" variant="dark">
-    <Container>
-      <Navbar.Brand >Proyect</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-        <Nav.Link 
-          onClick={() => navigate("/home")}>Home</Nav.Link>
-        <Nav.Link 
-          onClick={() => navigate("/crear/pregunta")}>Crear Pregunta</Nav.Link>
-        <Nav.Link 
-          onClick={() => navigate("/ver/ranking")}>Ver Ranking</Nav.Link>
-          <NavDropdown title="Estudiantes" id="basic-nav-dropdown">
-            <NavDropdown.Item onClick={() => navigate("/registro/alumnos")}>Registrar</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Eliminar
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Revisar</NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-      </Navbar.Collapse>
-      <Navbar.Collapse className="justify-content-end">
-          <Button
-            variant="outline-secondary"
-            onClick={handleLogout}
-            >Log out</Button>
-        </Navbar.Collapse>
-    </Container>
-  </Navbar>
-);
+
+if(PermisoDocente===true)return (
+ 
+  <Barra_Docente setLogueado={setLogueado}></Barra_Docente>
+
+)
+else if(PermisoDocente===false)return(
+  <Barra_Estudiante setLogueado={setLogueado}></Barra_Estudiante>
+)
               
     
     

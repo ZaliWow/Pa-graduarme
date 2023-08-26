@@ -3,12 +3,14 @@ import Card from 'react-bootstrap/Card';
 import { Recomendaciones } from './Recomendaciones';
 import '../estilos/estilorecomendacion.css'
 import { No_loguin } from "./No_loguin"
+import { useNavigate } from 'react-router-dom';
 export function Crear_Pregunta({Logueado}) {
   if(Logueado===false)return (
     <No_loguin />
   )
+  const navigate = useNavigate()
   return (
-    
+   
     <>
     <div className='estilorecomendacion'>
     <Recomendaciones></Recomendaciones>
@@ -26,7 +28,7 @@ export function Crear_Pregunta({Logueado}) {
         </Card.Text>
         <Button 
         variant="dark"
-       
+        onClick={()=> {navigate('/crear/pregunta/falso/verdadero')}}
         >Lets go!</Button>
       </Card.Body>
     </Card>
@@ -39,7 +41,7 @@ export function Crear_Pregunta({Logueado}) {
         </Card.Text>
         <Button 
         variant="dark"
-        
+        onClick={()=> {navigate('/crear/pregunta/multiple/respuesta')}}
         >Lets go!</Button>
       </Card.Body>
     </Card>
@@ -52,7 +54,7 @@ export function Crear_Pregunta({Logueado}) {
         </Card.Text>
         <Button 
         variant="dark"
-        
+        onClick={()=> {navigate('/crear/pregunta/respuesta/abierta')}}
         >Lets go!</Button>
       </Card.Body>
     </Card>
