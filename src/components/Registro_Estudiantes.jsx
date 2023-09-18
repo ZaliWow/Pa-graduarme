@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap"
 import Button from "react-bootstrap/Button"
 import '../estilos/estiloregistro.css'
-import { useState, useEffect } from "react"
+import { useState, useRef } from "react"
 import { No_loguin } from "./No_loguin"
 import { useNavigate } from "react-router-dom"
 export  function Registro_Estudiantes({Logueado}) {
@@ -21,7 +21,13 @@ export  function Registro_Estudiantes({Logueado}) {
     contra_estudiante:""
 
   })
-
+  const [cursoEstudiante, setCursoEstudiante]= useState(
+    {
+      id_estudiante:"",
+    id_curso:""}
+  )
+const idEstudiante = useRef(null)
+const idCurso = useRef(null)
   // PARA CONTROLAR EL SUBMIT DEL FORMULARIO
   const handleSubmit = async (e)=>{
   e.preventDefault()
@@ -29,6 +35,11 @@ export  function Registro_Estudiantes({Logueado}) {
     const res = await fetch('http://localhost:4000/registro/estudiantes',{
       method:'POST',
       body: JSON.stringify(inputEstudiante),
+      headers:{"Content-Type":"application/json"}
+    })
+    const res2 = await fetch('http://localhost:4000/cursos/estudiantes',{
+      method:'POST',
+      body: JSON.stringify(cursoEstudiante),
       headers:{"Content-Type":"application/json"}
     })
     navigate('/home')
@@ -39,8 +50,16 @@ export  function Registro_Estudiantes({Logueado}) {
   }
 
   // PARA LOS CAMBIOS DENTRO DE LOS IMPUTS
-  const handleChange=(e)=>
+  const handleChange=(e)=>{
     setInputestudiante({...inputEstudiante,[e.target.name]: e.target.value})
+    
+    setCursoEstudiante({
+      id_estudiante: idEstudiante.current.value,
+      id_curso:idCurso.current.value 
+    })
+  }
+  
+  
   
 
 
@@ -55,6 +74,7 @@ export  function Registro_Estudiantes({Logueado}) {
         type="text" 
         placeholder="Ingresa la identificacion del estudiante" 
         onChange={handleChange}
+        ref={idEstudiante}
         />
    
       </Form.Group>
@@ -90,6 +110,20 @@ export  function Registro_Estudiantes({Logueado}) {
           Los correos electronicos son unicos para cada estudiante.
         </Form.Text>
       </Form.Group>
+      <Form.Group className="mb-3" >
+        <Form.Label>Curso del estudiante</Form.Label>
+        <Form.Control 
+        name="curso_estudiante"
+        type="text" 
+        placeholder="Ingresa curso del estudiante"
+        onChange={handleChange}
+        ref={idCurso}
+     
+        />
+         <Form.Text className="text-muted">
+          Debes ingresar el codigo de tu curso: puedes consultarlo en tu apartado de "Cursos"
+        </Form.Text>
+      </Form.Group>
 
       <Form.Group className="mb-3" >
         <Form.Label>Contraseña</Form.Label>
@@ -100,6 +134,8 @@ export  function Registro_Estudiantes({Logueado}) {
         onChange={handleChange}
         />
       </Form.Group>
+<br />
+
       <Button 
       variant="dark"
       type="submit" >

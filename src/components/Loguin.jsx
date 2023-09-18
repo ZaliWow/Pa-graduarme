@@ -11,7 +11,16 @@ export  function Loguin({
   setLogueado,
   setUsuario,
   user,
-  setPermisoDocente
+  setPermisoDocente,
+  userDocente,
+  setDocente,
+  cursos,
+  setCursos,
+  setPermisoAdmin,
+  setInsignias,
+  insignias, 
+  infoInsignias,
+  setInfoInsignias
   
 }) {
   
@@ -19,6 +28,7 @@ const tipoUsuarioRef = useRef(null)
 
 const [correoEstudiante, setCorreoEstudiante]=useState('')
 const [contraEstudiante, setContraEstudiante]=useState('')
+const [idEstudiante, setIdEstudiante]=useState('')
 
 const [error, setError]=useState(false)
 //Hook de navegacion  
@@ -69,20 +79,30 @@ if (tipoUsuarioRef.current.value==="estudiante") {
     for(let i=0;res.data.length > i; i++){
       if(res.data[i].correo_estudiante === correoEstudiante && res.data[i].contra_estudiante === contraEstudiante)
       {
+       
         setLogueado(true)
         setPermisoDocente(false)
         navigate('/home')
         setUsuario({...user, 
           id_estudiante: res.data[i].id_estudiante,
-          puntaje_estudiante:res.data[i].puntaje_estudiante,
+          puntaje_estudiante:res.data[i].puntaje,
           correo_estudiante:res.data[i].correo_estudiante,
           nombre_estudiante:res.data[i].nombre_estudiante,
           apellido_estudiante:res.data[i].apellido_estudiante,  
         })
-      }else{
-        
+        const res2 = await axios.get(`http://localhost:4000/insignias/estudiante/${res.data[i].id_estudiante}`)
+        for(let i=0; res2.data.length > i; i++ ) { 
+        setInsignias(insignias  => [...insignias, res2.data[i]])
+        const res3 = await axios.get(`http://localhost:4000/insignia/${res2.data[i].id_insignia}`)
+        setInfoInsignias(infoInsignias  => [...infoInsignias, res3.data[0]])
+      }
+      
+      }
+      
+      else{
         setError(true)
       }
+    
     }  
    } catch (error) {
     console.log(error)
@@ -96,6 +116,21 @@ if( res.data[0].contra_profesor === contraEstudiante)
   setLogueado(true)
   setPermisoDocente(true)
   navigate('/home')
+  setDocente({
+    ...userDocente,
+    id_profesor: res.data[0].id_profesor,
+    nombre_profesor: res.data[0].nombre_profesor,
+    apellido_profesor: res.data[0].apellido_profesor,
+    correo_profesor: res.data[0].correo_profesor
+  })
+const resdos =  await axios.get(`http://localhost:4000/curso/${res.data[0].id_profesor}`)
+for(let i=0;resdos.data.length > i; i++){
+  setCursos((cursos=>[...cursos, resdos.data[i]]))
+  console.log(resdos.data[i]) 
+}
+
+
+
 }else{
   setError(true)
 }
@@ -104,11 +139,28 @@ if( res.data[0].contra_profesor === contraEstudiante)
   } catch (error){
     console.log(error)
   }
+}else if(tipoUsuarioRef.current.value==="Admin"){
+  setLogueado(true)
+  setPermisoAdmin(true)
+  navigate('/home')
+
 }
   
   
 
 }
+
+//PARA ENCONTRAR LOS CURSOS DEL DOCENTE
+const handleCursos = async(e)=>{
+console.log(userDocente.id_profesor)
+const res = await axios.get(`http://localhost:4000/curso/${userDocente.id_profesor}`)
+for(let i=0;res.data.length > i; i++){
+  setCursos((cursos=>[...cursos, res.data[i]]))
+  
+}
+console.log(cursos)
+}
+
   return (
     <div >
       
@@ -121,6 +173,7 @@ if( res.data[0].contra_profesor === contraEstudiante)
     ref={tipoUsuarioRef}> 
       <option value="estudiante" >Estudiante</option>
       <option value="docente">Docente</option>
+      <option value="Admin">Administrador</option>
     </Form.Select>
 
 

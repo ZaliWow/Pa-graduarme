@@ -1,0 +1,30 @@
+.estiloExamen{ 
+    position: relative;
+    width: 60%;
+    min-height: 100%;
+    background-color: #ffc107;
+    margin-left: 10%;
+    margin-right:10% ;
+    
+    
+    box-shadow: 7px 13px 37px #393939;
+    padding: 20px 30px;
+    
+}
+.estiloExamen img{
+    height: 200px;
+    width: 400px;
+    padding: 20px 20px;
+}
+.estiloExamen img[src=""]{
+    display: none;
+}
+.estiloRevisar{
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    background-color: #ffffff;
+    margin-top: 10px;
+    box-shadow: 7px 13px 37px #393939;
+    padding: 20px 30px;
+}

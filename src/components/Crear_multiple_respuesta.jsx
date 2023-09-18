@@ -198,7 +198,7 @@ return(
        aria-label="Default select example"
      />
      <Form.Text id="passwordHelpBlock" muted>
-       Tu pregunta debe ser de tipo respuesta multiple; además debe ser acorde al nivel de dificultad elegido
+      
      </Form.Text>
     
              <br />
@@ -246,7 +246,7 @@ return(
      <option value="D">D</option>
        </Form.Select>  
 <br />
-              <Form.Label htmlFor="inputPassword5">Elija una imagen de apoyo</Form.Label>  
+              <Form.Label htmlFor="inputPassword5">Asigne un puntaje a su pregunta</Form.Label>  
 
       <Form.Control
        ref ={puntajeMultipleRef}
@@ -255,6 +255,9 @@ return(
        aria-label="Default select example"
        onChange={handleFileChange}
      />
+     <br />
+     <Form.Label htmlFor="inputPassword5">Elija una imagen de apoyo</Form.Label>  
+
  <Form.Control
     
        type="file"
@@ -272,9 +275,7 @@ return(
            </section>
            
            <br />       
-        <Button variant="outline-alert"
-        onClick={ handleBack}
-        > Back </Button>     
+           
        </div>
        <Preview_Multiple show={mostrarPreview} 
        setMostrarPreview={setMostrarPreview}

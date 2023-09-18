@@ -1,0 +1,40 @@
+.estilodocente{
+    display: block;
+    width: 70%;
+    height: 100%;
+    background-color: #e0e0df;
+    margin-left: 0%;
+    margin-top: 5%;
+    margin-bottom:5%;
+    box-shadow: 7px 13px 37px #393939;
+    padding: 20px 30px;
+}
+.estilodocentedos{
+    display: block;
+    width: 40%;
+    height: 10%;
+ margin-top: 5%;
+    
+   
+    
+ 
+}
+.container{
+    display: flex;
+    
+    
+}
+.estilodocentedos img{
+    height: 100px;
+    width:100px;
+    padding: 5px 5px;
+}
+.estilodocentetres{
+    display: block;
+    width: 100px;
+    height: 100px;
+    
+    
+   
+    padding: 20px 30px;
+}

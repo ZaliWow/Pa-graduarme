@@ -173,6 +173,7 @@ setMostrarPreview(true)
         className ="FormularioPreguntas"
         > 
         <form onSubmit={handleSubmit}>
+          
         <Form.Label htmlFor="inputPassword5">Elija la dificultad de su pregunta</Form.Label>  
         <Form.Select 
         ref={dificultadVFRef}
@@ -188,9 +189,10 @@ setMostrarPreview(true)
         type="text"
         id="PreguntaAbierta"
         aria-label="Default select example"
+        
       />
       <Form.Text id="passwordHelpBlock" muted>
-        Tu pregunta debe ser de tipo respuesta Falso o Verdadero; además debe ser acorde al nivel de dificultad elegido
+        
       </Form.Text>
                 <br />
       <Form.Label htmlFor="inputPassword5">Elija la respuesta correcta a su pregunta</Form.Label>  
@@ -210,7 +212,7 @@ setMostrarPreview(true)
         
       />
       <Form.Text id="passwordHelpBlock" muted>
-        Tu puntaje debe ser acorde al nivel de dificultad elegido
+      
       </Form.Text>
       <br />
       <Form.Label htmlFor="inputPassword5">Adjunte material de apoyo</Form.Label>
@@ -219,9 +221,10 @@ setMostrarPreview(true)
         id="PuntajePregunta"
         aria-label="Default select example"
         onChange={handleFileChange}
+       
       />
       <Form.Text id="passwordHelpBlock" muted>
-        El material de apoyo deben ser Fotos en formato PNG
+       
       </Form.Text>
 
 

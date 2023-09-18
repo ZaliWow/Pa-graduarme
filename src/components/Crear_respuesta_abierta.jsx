@@ -156,6 +156,11 @@ const handleFileChange = (event) => {
     const handleBack=(evento)=>{
       navigate('/crear/pregunta')
      }
+
+
+
+
+     
     return(
       <>
         <div className="FormularioPreguntas">
@@ -180,10 +185,11 @@ const handleFileChange = (event) => {
         id="PreguntaAbierta"
         aria-label="Default select example"
       />
-      <Form.Text id="passwordHelpBlock" muted>
-        Tu pregunta debe ser de tipo respuesta abierta; además debe ser acorde al nivel de dificultad elegido
-      </Form.Text>
-     
+      <br />
+   
+      <Form.Label id="passwordHelpBlock" muted>
+        Respuesta a esperar
+      </Form.Label>
               <br />
               <Form.Control
   
@@ -192,9 +198,10 @@ const handleFileChange = (event) => {
         aria-label="Default select example"
         ref={respuestaCorrectaRef}
       />
-       <Form.Text id="passwordHelpBlock" muted>
-        Respuesta a esperar
-      </Form.Text>
+      <br />
+      <Form.Label id="passwordHelpBlock" muted>
+        Asigne un puntaje a su pregunta
+      </Form.Label>
       <br />
               <Form.Control
   
@@ -203,9 +210,10 @@ const handleFileChange = (event) => {
         aria-label="Default select example"
         ref={puntajeAbiertaRef}
       />
-       <Form.Text id="passwordHelpBlock" muted>
-        Asigne un puntaje a su pregunta
-      </Form.Text>
+      <br />
+      <Form.Label id="passwordHelpBlock" muted>
+        Sube una imagen de apoyo
+      </Form.Label>
       <br />
       
       <Form.Control
@@ -215,9 +223,7 @@ const handleFileChange = (event) => {
         aria-label="Default select example"
         onChange={handleFileChange}
       />
-       <Form.Text id="passwordHelpBlock" muted>
-        Sube una imagen de apoyo
-      </Form.Text>
+       
       <br />
               <Button 
         variant="dark"
@@ -230,9 +236,7 @@ const handleFileChange = (event) => {
         </form>
         </section>
         <br />       
-        <Button variant="outline-alert"
-        onClick={ handleBack}
-        > Back </Button>     
+            
         </div>
 
         <Preview_Abierta show={mostrarPreview} 

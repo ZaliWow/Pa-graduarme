@@ -2,7 +2,7 @@
     position: relative;
     width: 40%;
     min-height: 100%;
-    background-color: #ffc107;
+    background-color: #e0e0df;
     margin-left: 30%;
     margin-right:30% ;
     margin-top: 5%;
@@ -12,9 +12,25 @@
     
 }
 @media screen and (max-width: 480px){
+   
     .estiloregistro{
         width: 80%;
         margin-left:10%;
         margin-right:10% ;
         padding: auto;
     }}
+
+.estilodocente{
+    display: block;
+    width: 50%;
+    min-height: 100%;
+    background-color: #e0e0df;
+    margin-left: 1%;
+    margin-top: 5%;
+    margin-bottom:5%;
+    box-shadow: 7px 13px 37px #393939;
+    padding: 20px 30px;
+}
+.container{
+    display: flex;
+}

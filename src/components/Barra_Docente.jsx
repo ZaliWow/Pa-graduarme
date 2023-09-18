@@ -4,13 +4,97 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import {Link , useNavigate } from "react-router-dom";
+import { Ver_ranking } from './Ver_ranking';
+import { useState } from 'react';
+import axios from 'axios';
+import { Curso } from './Curso';
 
-export function Barra_Docente({setLogueado}) {
+
+export function Barra_Docente({setLogueado, HandleLogout}) {
     const handleLogout = (e)=>{
         setLogueado(false)
         navigate("/")
+        HandleLogout()
+        
         }
         const navigate = useNavigate();
+        const [verRank, setVerRank] = useState(false)
+        const [rankEstudiantes, setRankEstudiantes] = useState([
+          {
+            id_estudiante: "",
+            nombre_estudiante: "",
+            apellido_estudiante: "",
+            correo_estudiante: "",
+            puntaje: "",
+            contra_estudiante: ""
+          },
+
+        ])
+
+        const handleRanking = async(e)=>{
+          try {
+            e.preventDefault()
+          const res = await axios.get('http://localhost:4000/rank/estudiantes')
+          for(let i=0; res.data.length > i; i++ )
+          setRankEstudiantes(rankEstudiantes => [...rankEstudiantes, res.data[i]])
+          navigate("/ver/ranking")
+          setVerRank(true)
+          } catch (error) {
+            console.log(error)
+          }
+          
+        }
+        
+        const  handleHome = (e) =>{
+          navigate("/home")
+          setVerRank(false)
+          setRankEstudiantes([{
+            id_estudiante: "",
+            nombre_estudiante: "",
+            apellido_estudiante: "",
+            correo_estudiante: "",
+            puntaje: "",
+            contra_estudiante: ""
+          },])
+        }
+        const  handleRegistroAlumnos = (e) =>{
+          navigate("/registro/alumnos")
+          setVerRank(false)
+          setRankEstudiantes([{
+            id_estudiante: "",
+            nombre_estudiante: "",
+            apellido_estudiante: "",
+            correo_estudiante: "",
+            puntaje: "",
+            contra_estudiante: ""
+          },])
+        }
+        const  handleCrearPregunta = (e) =>{
+          navigate("/crear/pregunta")
+          setVerRank(false)
+          setRankEstudiantes([{
+            id_estudiante: "",
+            nombre_estudiante: "",
+            apellido_estudiante: "",
+            correo_estudiante: "",
+            puntaje: "",
+            contra_estudiante: ""
+          },])
+        }
+        const handleCurso = (e) =>{
+          navigate("/curso")
+          setVerRank(false)
+          setRankEstudiantes([{
+            id_estudiante: "",
+            nombre_estudiante: "",
+            apellido_estudiante: "",
+            correo_estudiante: "",
+            puntaje: "",
+            contra_estudiante: ""
+          },])
+        }
+        
+
 
     return(
         <>
@@ -21,18 +105,15 @@ export function Barra_Docente({setLogueado}) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
         <Nav.Link 
-          onClick={() => navigate("/home")}>Home</Nav.Link>
+          onClick={handleHome }>Home</Nav.Link>
         <Nav.Link 
-          onClick={() => navigate("/crear/pregunta")}>Crear Pregunta</Nav.Link>
+          onClick={handleCrearPregunta}>Crear Pregunta</Nav.Link>
         <Nav.Link 
-          onClick={() => navigate("/ver/ranking")}>Ver Ranking</Nav.Link>
-          <NavDropdown title="Estudiantes" id="basic-nav-dropdown">
-            <NavDropdown.Item onClick={() => navigate("/registro/alumnos")}>Registrar</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Eliminar
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Revisar</NavDropdown.Item>
-          </NavDropdown>
+          onClick={handleRanking}>Ver Ranking</Nav.Link>
+        <Nav.Link onClick={handleCurso}
+          >Cursos</Nav.Link>
+        <Nav.Link onClick={handleRegistroAlumnos}>Registrar Estudiante</Nav.Link>
+          
         </Nav>
       </Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
@@ -44,6 +125,8 @@ export function Barra_Docente({setLogueado}) {
     </Container>
   </Navbar>
   
+<Ver_ranking rankEstudiantes={rankEstudiantes}  verRank={verRank}/>
+<Curso />
  </>
     )
     

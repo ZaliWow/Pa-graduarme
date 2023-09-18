@@ -1,0 +1,16 @@
+.estiloEstudiantes{
+    position: relative;
+    width: 60%;
+    min-height: 100%;
+    background-color: #ffc107;
+    margin-left: 10%;
+    margin-right:10% ;
+    margin-top: 40px; 
+    margin-bottom:0%;
+    box-shadow: 7px 13px 37px #393939;
+    padding: 20px 30px;
+}
+.botonBack{
+
+    margin-left: 80%;
+}

@@ -1,72 +1,80 @@
 import Table from 'react-bootstrap/Table';
 import '../estilos/estiloranking.css'
 import { No_loguin } from "./No_loguin"
-export function Ver_ranking({Logueado}) {
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
+import { useState } from 'react';
+
+export function Ver_ranking({Logueado, rankEstudiantes, verRank}) {
+ 
+
+  
+  
   if(Logueado===false)return (
     <No_loguin />
   )
-    return(
+  if(verRank === true) return ( 
+      
+      <div>
+        
         <div className='estiloranking'>
         <Table striped bordered hover>
+          
       <thead>
         <tr>
           <th>Top</th>
-          <th>Primer Nombre</th>
-          <th>Segundo Nombre</th>
+          <th>Nombre</th>
+          <th>Identificacion</th>
           <th>Puntaje</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>5451</td>
+          <td>{rankEstudiantes[1].nombre_estudiante} </td>
+          <td>{rankEstudiantes[1].id_estudiante}</td>
+          <td>{rankEstudiantes[1].puntaje}</td>
         </tr>
         <tr>
           <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>4561</td>
+          <td>{rankEstudiantes[2].nombre_estudiante}</td>
+          <td>{rankEstudiantes[2].id_estudiante}</td>
+          <td>{rankEstudiantes[2].puntaje}</td>
         </tr>
         <tr>
           <td>3</td>
-          <td>Juan</td>
-          <td>Jimenez</td>
-          <td>2800</td>
+          <td>{rankEstudiantes[3].nombre_estudiante}</td>
+          <td>{rankEstudiantes[3].id_estudiante}</td>
+          <td>{rankEstudiantes[3].puntaje}</td>
         </tr>
         <tr>
           <td>4</td>
-          <td>Lizet</td>
-          <td>Jimenez</td>
-          <td>2700</td>
+          <td>{rankEstudiantes[4].nombre_estudiante}</td>
+          <td>{rankEstudiantes[4].id_estudiante}</td>
+          <td>{rankEstudiantes[4].puntaje}</td>
         </tr>
         <tr>
           <td>5</td>
-          <td>Valentina</td>
-          <td>Bandida</td>
-          <td>2600</td>
+          <td>{rankEstudiantes[5].nombre_estudiante}</td>
+          <td>{rankEstudiantes[5].id_estudiante}</td>
+          <td>{rankEstudiantes[5].puntaje}</td>
         </tr>
         <tr>
           <td>6</td>
-          <td>Isa</td>
-          <td>Jimenez</td>
-          <td>2500</td>
+          <td>{rankEstudiantes[6].nombre_estudiante}</td>
+          <td>{rankEstudiantes[6].id_estudiante}</td>
+          <td>{rankEstudiantes[6].puntaje}</td>
         </tr>
         <tr>
           <td>7</td>
-          <td>Nicolas</td>
-          <td>Marin</td>
-          <td>2000</td>
+          <td>{rankEstudiantes[7].nombre_estudiante}</td>
+          <td>{rankEstudiantes[7].id_estudiante}</td>
+          <td>{rankEstudiantes[7].puntaje}</td>
         </tr>
-        <tr>
-          <td>8</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>1000</td>
-        </tr>
+        
       </tbody>
     </Table>
     </div>
+    </div>
     )
-    
 }
