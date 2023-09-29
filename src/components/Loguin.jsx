@@ -147,9 +147,13 @@ try {
     {
   setLogueado(true)
     setPermisoAdmin(true)
-    navigate('/home') }}
+    navigate('/home') }
+    else{
+      setError(true)
+    }}
 
 } catch (error) {
+
   
 }
     
