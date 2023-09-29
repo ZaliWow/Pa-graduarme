@@ -236,9 +236,7 @@ console.log(cursos)
       Log in!
     </Button>
 
-    <Button variant="outline-dark" onClick={loguearse}>
-      Back
-    </Button>
+    
   </Form>
   </div>
   </div>
