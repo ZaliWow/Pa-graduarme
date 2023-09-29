@@ -52,7 +52,7 @@ const handleEstudiantesCurso = async (idCurso)=>{
     try {
        const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/students/curso/${idCurso}`)
        for(let i=0; res.data.length > i; i++ ){
-        const result = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/http://localhost:4000/registro/estudiantes/${res.data[i].id_estudiante}`)
+        const result = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiantes/${res.data[i].id_estudiante}`)
         setListaEstudiantes(listaEstudiantes => [...listaEstudiantes, res.data[i]])
         setInfoEstudiantes(infoEstudiantes  => [...infoEstudiantes, result.data[0]])
         
