@@ -5,6 +5,9 @@
     background-color: #ffc107;
     margin-left: 10%;
     margin-right:10% ;
+    margin-bottom: 3%;
+    margin-top: 1%;
+
     
     
     box-shadow: 7px 13px 37px #393939;
@@ -18,6 +21,13 @@
 }
 .estiloExamen img[src=""]{
     display: none;
+}
+@media (min-width: 449px) and (max-width: 449px) {
+    .estiloExamen img {
+        max-width: 250px;
+        max-height: 140px;
+        padding: 20px 20px; 
+    }
 }
 .estiloRevisar{
     position: relative;

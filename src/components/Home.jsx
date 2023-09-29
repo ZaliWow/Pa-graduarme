@@ -18,14 +18,12 @@ export function Home({
   return (
     <div className="container">
       <div className="estilodocentedos">
-        <h4>Bienvenido </h4>
-        <h6>{user.nombre_estudiante} {user.apellido_estudiante}</h6>
-        <h4>Tu correo es </h4>
-        <h6>{user.correo_estudiante}</h6>
-        <h4>Tu puntaje actual es </h4>
-        <h6>{user.puntaje_estudiante}</h6>
-        <h4>Tu id es </h4>
-        <h6>{user.id_estudiante}</h6>
+   
+        <h6> Bienvenido {user.nombre_estudiante} {user.apellido_estudiante}</h6>
+        <h6>Correo Electronico {user.correo_estudiante}</h6>
+        <h6> Puntaje Actual {user.puntaje_estudiante}</h6>
+        
+        <h6>Identificación {user.id_estudiante}</h6>
       </div>
         <div >
          <div >
@@ -34,10 +32,10 @@ export function Home({
 
               <div
                 className="estilodocentedos"
-                controls
+            
                 >
                     <h6
-                 controls
+              
                  
                   >Insignia :
                   </h6>

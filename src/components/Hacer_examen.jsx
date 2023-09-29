@@ -161,18 +161,26 @@ const navigate = useNavigate()
           console.log(NewPuntaje)
           if(multiples[1].respuesta_correcta === bodyTwo){
             NewPuntaje = NewPuntaje + parseInt(multiples[1].puntaje_pregunta)
+          } else if(multiples[1].respuesta_correcta !== bodyTwo){
+            NewPuntaje = NewPuntaje - parseInt(multiples[1].puntaje_pregunta)
           }
           console.log(NewPuntaje)
           if(multiples[2].respuesta_correcta === bodyThree){
             NewPuntaje = NewPuntaje + parseInt(multiples[2].puntaje_pregunta)
+          }else if(multiples[2].respuesta_correcta !== bodyThree){
+            NewPuntaje = NewPuntaje - parseInt(multiples[2].puntaje_pregunta)
           }
           console.log(NewPuntaje)
           if(falsoVerdaderos[1].respuesta_correcta ===bodyFor){
             NewPuntaje = NewPuntaje + parseInt(falsoVerdaderos[1].puntaje_pregunta)
+          }else if(falsoVerdaderos[1].respuesta_correcta !==bodyFor){
+            NewPuntaje = NewPuntaje - parseInt(falsoVerdaderos[1].puntaje_pregunta)
           }
           console.log(NewPuntaje)
           if(falsoVerdaderos[2].respuesta_correcta ===bodyFive){
             NewPuntaje = NewPuntaje + parseInt(falsoVerdaderos[2].puntaje_pregunta)
+          }else if(falsoVerdaderos[2].respuesta_correcta !==bodyFive){
+            NewPuntaje = NewPuntaje - parseInt(falsoVerdaderos[2].puntaje_pregunta)
           }
           console.log(NewPuntaje)
              
@@ -382,7 +390,7 @@ const proba = ()=> {
 
 <div className="estiloExamen" >
     <Button variant="dark" onClick={handleTerminarExamen}> Terminar examen</Button>
-    <Button onClick={proba}>proba</Button>
+    
     <br />
 </div>
         </div>

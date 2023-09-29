@@ -75,7 +75,7 @@ const handleSubmit = async(e)=>{
 
 if (tipoUsuarioRef.current.value==="estudiante") {
   try {
-    const res = await axios.get('http://localhost:4000/registro/estudiantes')  
+    const res = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/registro/estudiantes')  
     for(let i=0;res.data.length > i; i++){
       if(res.data[i].correo_estudiante === correoEstudiante && res.data[i].contra_estudiante === contraEstudiante)
       {
@@ -90,10 +90,10 @@ if (tipoUsuarioRef.current.value==="estudiante") {
           nombre_estudiante:res.data[i].nombre_estudiante,
           apellido_estudiante:res.data[i].apellido_estudiante,  
         })
-        const res2 = await axios.get(`http://localhost:4000/insignias/estudiante/${res.data[i].id_estudiante}`)
+        const res2 = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/insignias/estudiante/${res.data[i].id_estudiante}`)
         for(let i=0; res2.data.length > i; i++ ) { 
         setInsignias(insignias  => [...insignias, res2.data[i]])
-        const res3 = await axios.get(`http://localhost:4000/insignia/${res2.data[i].id_insignia}`)
+        const res3 = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/insignia/${res2.data[i].id_insignia}`)
         setInfoInsignias(infoInsignias  => [...infoInsignias, res3.data[0]])
       }
       
@@ -109,7 +109,7 @@ if (tipoUsuarioRef.current.value==="estudiante") {
    }
 } else if (tipoUsuarioRef.current.value==="docente") {
   try{
-const res = await axios.get(`http://localhost:4000/profesor/correo/${correoEstudiante}`)
+const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/profesor/correo/${correoEstudiante}`)
 
 if( res.data[0].contra_profesor === contraEstudiante)
 {
@@ -123,7 +123,7 @@ if( res.data[0].contra_profesor === contraEstudiante)
     apellido_profesor: res.data[0].apellido_profesor,
     correo_profesor: res.data[0].correo_profesor
   })
-const resdos =  await axios.get(`http://localhost:4000/curso/${res.data[0].id_profesor}`)
+const resdos =  await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/curso/${res.data[0].id_profesor}`)
 for(let i=0;resdos.data.length > i; i++){
   setCursos((cursos=>[...cursos, resdos.data[i]]))
   console.log(resdos.data[i]) 
@@ -153,7 +153,7 @@ for(let i=0;resdos.data.length > i; i++){
 //PARA ENCONTRAR LOS CURSOS DEL DOCENTE
 const handleCursos = async(e)=>{
 console.log(userDocente.id_profesor)
-const res = await axios.get(`http://localhost:4000/curso/${userDocente.id_profesor}`)
+const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/curso/${userDocente.id_profesor}`)
 for(let i=0;res.data.length > i; i++){
   setCursos((cursos=>[...cursos, res.data[i]]))
   
