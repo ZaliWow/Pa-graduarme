@@ -140,15 +140,31 @@ for(let i=0;resdos.data.length > i; i++){
     console.log(error)
   }
 }else if(tipoUsuarioRef.current.value==="Admin"){
+try {
+  const restres = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/admin')  
+  for(let i=0;restres.data.length > i; i++){
+    if(restres.data[i].correo_admin === correoEstudiante && restres.data[i].contra_admin === contraEstudiante)
+    {
   setLogueado(true)
-  setPermisoAdmin(true)
-  navigate('/home')
+    setPermisoAdmin(true)
+    navigate('/home') }}
 
+} catch (error) {
+  
 }
-  
-  
+    
+    
 
-}
+  }
+
+
+
+
+
+
+
+} 
+
 
 //PARA ENCONTRAR LOS CURSOS DEL DOCENTE
 const handleCursos = async(e)=>{
