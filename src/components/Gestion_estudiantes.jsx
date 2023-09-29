@@ -23,7 +23,7 @@ id_curso:idCursoRef.current.value
     const handleSubmit = async (e)=>{
         e.preventDefault()
         try {
-            const res = await fetch(`http://localhost:4000/cursos/estudiantes/${idEstudianteRef.current.value}`,{
+            const res = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/cursos/estudiantes/${idEstudianteRef.current.value}`,{
                 method:'PUT',
                 body: JSON.stringify(idCurso),
                 headers:{"Content-Type":"application/json"}
@@ -36,7 +36,7 @@ id_curso:idCursoRef.current.value
     const handleDelete = async (e)=>{
         e.preventDefault()
         try {
-            const res = await axios.delete(`http://localhost:4000/cursos/estudiantes/${idEstudianteDeleteRef.current.value}`)
+            const res = await axios.delete(`https://proyecto-backend-william-david-morales.onrender.com/cursos/estudiantes/${idEstudianteDeleteRef.current.value}`)
            } catch (error) {
             console.log(error)
         }

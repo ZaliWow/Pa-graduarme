@@ -32,12 +32,12 @@ const idCurso = useRef(null)
   const handleSubmit = async (e)=>{
   e.preventDefault()
   try {
-    const res = await fetch('http://localhost:4000/registro/estudiantes',{
+    const res = await fetch('https://proyecto-backend-william-david-morales.onrender.com/registro/estudiantes',{
       method:'POST',
       body: JSON.stringify(inputEstudiante),
       headers:{"Content-Type":"application/json"}
     })
-    const res2 = await fetch('http://localhost:4000/cursos/estudiantes',{
+    const res2 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/cursos/estudiantes',{
       method:'POST',
       body: JSON.stringify(cursoEstudiante),
       headers:{"Content-Type":"application/json"}

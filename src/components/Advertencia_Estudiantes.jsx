@@ -68,15 +68,15 @@ export function Advertencia_Estudiantes({
       e.preventDefault()
         try {
            
-          const resOne = await axios.get('http://localhost:4000/preguntas/examen/multiple/Dificil')
+          const resOne = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/multiple/Dificil')
           for(let i=0; resOne.data.length > i; i++){
             setMultiples(( multiples => [... multiples, resOne.data[i]]))
           }
-          const resTwo = await axios.get('http://localhost:4000/preguntas/examen/fv/Dificil')
+          const resTwo = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/fv/Dificil')
           for(let i=0; resTwo.data.length > i; i++){
             setFalsoVerdaderos((falsoVerdaderos=> [... falsoVerdaderos, resTwo.data[i]]))
           }
-          const resThree = await axios.get('http://localhost:4000/preguntas/examen/abierta/Dificil')
+          const resThree = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/abierta/Dificil')
           for(let i=0; resThree.data.length > i; i++){
             setAbiertas((abiertas=> [... abiertas, resThree.data[i]] ))
           }
@@ -96,15 +96,15 @@ export function Advertencia_Estudiantes({
       e.preventDefault()
       try {
          
-        const resOne = await axios.get('http://localhost:4000/preguntas/examen/multiple/Facil')
+        const resOne = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/multiple/Facil')
         for(let i=0; resOne.data.length > i; i++){
           setMultiples(( multiples => [... multiples, resOne.data[i]]))
         }
-        const resTwo = await axios.get('http://localhost:4000/preguntas/examen/fv/Facil')
+        const resTwo = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/fv/Facil')
         for(let i=0; resTwo.data.length > i; i++){
           setFalsoVerdaderos((falsoVerdaderos=> [... falsoVerdaderos, resTwo.data[i]]))
         }
-        const resThree = await axios.get('http://localhost:4000/preguntas/examen/abierta/Facil')
+        const resThree = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/abierta/Facil')
         for(let i=0; resThree.data.length > i; i++){
           setAbiertas((abiertas=> [... abiertas, resThree.data[i]] ))
         }
@@ -124,15 +124,15 @@ export function Advertencia_Estudiantes({
       e.preventDefault()
       try {
          
-        const resOne = await axios.get('http://localhost:4000/preguntas/examen/multiple/Media')
+        const resOne = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/multiple/Media')
         for(let i=0; resOne.data.length > i; i++){
           setMultiples(( multiples => [... multiples, resOne.data[i]]))
         }
-        const resTwo = await axios.get('http://localhost:4000/preguntas/examen/fv/Media')
+        const resTwo = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/fv/Media')
         for(let i=0; resTwo.data.length > i; i++){
           setFalsoVerdaderos((falsoVerdaderos=> [... falsoVerdaderos, resTwo.data[i]]))
         }
-        const resThree = await axios.get('http://localhost:4000/preguntas/examen/abierta/Media')
+        const resThree = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/preguntas/examen/abierta/Media')
         for(let i=0; resThree.data.length > i; i++){
           setAbiertas((abiertas=> [... abiertas, resThree.data[i]] ))
         }

@@ -31,14 +31,14 @@ export function Crear_falso_verdadero({}) {
 
       try {
         
-        const res = await fetch('http://localhost:4000/preguntas',{
+        const res = await fetch('https://proyecto-backend-william-david-morales.onrender.com/preguntas',{
         method:'POST',
         body: JSON.stringify(inputPregunta),
         headers:{"Content-Type":"application/json"}
 
       })
       
-        const res2 = await fetch('http://localhost:4000/falso/verdadero',{
+        const res2 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/falso/verdadero',{
           method:'POST',
           body: JSON.stringify(inputFV),
           headers:{"Content-Type":"application/json"}

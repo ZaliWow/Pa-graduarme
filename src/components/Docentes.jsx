@@ -29,7 +29,7 @@ export function Docentes({logueado, permisoAdmin}) {
         const handleSubmit = async (e)=>{
             e.preventDefault()
             try {
-              const res = await fetch('http://localhost:4000/profesor',{
+              const res = await fetch('https://proyecto-backend-william-david-morales.onrender.com/profesor',{
                 method:'POST',
                 body: JSON.stringify(inputDocente),
                 headers:{"Content-Type":"application/json"}
@@ -50,7 +50,7 @@ export function Docentes({logueado, permisoAdmin}) {
             const handleDelete = async (e)=>{
                 e.preventDefault()
                 try {
-                    const res = axios.delete(`http://localhost:4000/profesor/${idDelete.current.value}`)
+                    const res = axios.delete(`https://proyecto-backend-william-david-morales.onrender.com/profesor/${idDelete.current.value}`)
                     navigate('/home')
                 } catch (error) {
                     console.log(error)
@@ -60,7 +60,7 @@ export function Docentes({logueado, permisoAdmin}) {
             const handleUpdateCurso = async  (e)=>{
               e.preventDefault()
               try {
-                const res2 = await fetch(`http://localhost:4000/editar/curso/docente/${idCurso.current.value}`,{
+                const res2 = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/editar/curso/docente/${idCurso.current.value}`,{
                   method:'PUT',
                   body: JSON.stringify(ID_DOCENTE),
                   headers:{"Content-Type":"application/json"}

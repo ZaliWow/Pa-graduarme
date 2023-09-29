@@ -11,7 +11,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
     const handleRepartirMedallas = async (e)=>{
         try {
             const idRegistro = crypto.randomUUID()
-            const res = await fetch('http://localhost:4000/insignias/estudiante',{
+            const res = await fetch('https://proyecto-backend-william-david-morales.onrender.com/insignias/estudiante',{
                 method:'POST',
                 body: JSON.stringify({
                     id_registro:idRegistro,
@@ -20,7 +20,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
                 }),
                 headers:{"Content-Type":"application/json"}
               })
-              const res2 = await fetch('http://localhost:4000/insignias/estudiante',{
+              const res2 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/insignias/estudiante',{
                 method:'POST',
                 body: JSON.stringify({
                     id_registro: crypto.randomUUID(),
@@ -29,7 +29,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
                 }),
                 headers:{"Content-Type":"application/json"}
               })  
-              const res3 = await fetch('http://localhost:4000/insignias/estudiante',{
+              const res3 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/insignias/estudiante',{
                 method:'POST',
                 body: JSON.stringify({
                     id_registro: crypto.randomUUID(),
@@ -39,7 +39,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
                 headers:{"Content-Type":"application/json"}
               }) 
               for(let i = 1; 10 > i ; i++){
-                const res4 = await fetch('http://localhost:4000/insignias/estudiante',{
+                const res4 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/insignias/estudiante',{
                 method:'POST',
                 body: JSON.stringify({
                     id_registro: crypto.randomUUID(),
@@ -50,7 +50,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
               }) 
               }
               for(let i = 1; rankEstudiantes.length > i ; i++){
-                const resUpdate = await fetch(`http://localhost:4000/registro/estudiante/puntaje/${rankEstudiantes[i].id_estudiante}`,{
+                const resUpdate = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/estudiante/puntaje/${rankEstudiantes[i].id_estudiante}`,{
                     method:'PUT',
                     body: JSON.stringify({
                       puntaje:"0"
@@ -73,7 +73,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
     const handleReiniciarTemporada = async (e)=>{
         try {
             for(let i = 1; rankEstudiantes.length > i ; i++){
-                const resUpdate = await fetch(`http://localhost:4000/registro/estudiante/puntaje/${rankEstudiantes[i].id_estudiante}`,{
+                const resUpdate = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiante/puntaje/${rankEstudiantes[i].id_estudiante}`,{
                     method:'PUT',
                     body: JSON.stringify({
                       puntaje:"0"

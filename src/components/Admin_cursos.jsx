@@ -20,7 +20,7 @@ export function Admin_cursos({logueado, permisoAdmin}){
     const handleSubmit = async (e)=>{
         e.preventDefault()
         try {
-         const res1 = await fetch('http://localhost:4000/curso',{
+         const res1 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/curso',{
           method:'POST',
           body: JSON.stringify(inputCurso),
           headers:{"Content-Type":"application/json"}
@@ -39,7 +39,7 @@ export function Admin_cursos({logueado, permisoAdmin}){
         const handleDelete = async (e)=>{
             e.preventDefault()
             try {
-                const res = axios.delete(`http://localhost:4000/curso/${idDelete.current.value}`)
+                const res = axios.delete(`https://proyecto-backend-william-david-morales.onrender.com/curso/${idDelete.current.value}`)
                 navigate('/home')
             } catch (error) {
                 console.log(error)
@@ -49,7 +49,7 @@ export function Admin_cursos({logueado, permisoAdmin}){
         const handleDeleteAlumno = async (e)=>{
             e.preventDefault()
             try {
-                const res = axios.delete(`http://localhost:4000/cursos/estudiantes/${idDeleteAlumno.current.value}`)
+                const res = axios.delete(`https://proyecto-backend-william-david-morales.onrender.com/cursos/estudiantes/${idDeleteAlumno.current.value}`)
                 navigate('/home')
             } catch (error) {
                 cosole.log(error)

@@ -52,7 +52,7 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
         navigate("/ver/ranking")
         try {
             e.preventDefault()
-          const res = await axios.get('http://localhost:4000/rank/estudiantes')
+          const res = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/rank/estudiantes')
           for(let i=0; res.data.length > i; i++ )
           setRankEstudiantes(rankEstudiantes => [...rankEstudiantes, res.data[i]])
           navigate("/ver/ranking")
@@ -93,7 +93,7 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
       navigate("/medallas")
       try {
       e.preventDefault()
-      const res = await axios.get('http://localhost:4000/rank/estudiantes')
+      const res = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/rank/estudiantes')
       for(let i=0; res.data.length > i; i++ ){
         setRankEstudiantes(rankEstudiantes => [...rankEstudiantes, res.data[i]] )
       }

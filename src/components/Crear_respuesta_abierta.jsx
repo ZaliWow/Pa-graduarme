@@ -136,12 +136,12 @@ const handleFileChange = (event) => {
     const handleSubmit = async (e)=>{
       e.preventDefault()
       try {
-        const res1 = await fetch('http://localhost:4000/preguntas',{
+        const res1 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/preguntas',{
           method:'POST',
           body: JSON.stringify(inputPregunta),
           headers:{"Content-Type":"application/json"}
         })
-        const res2 = await fetch('http://localhost:4000/abierta',{
+        const res2 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/abierta',{
           method:'POST',
           body: JSON.stringify(inputAbierta),
           headers:{"Content-Type":"application/json"}

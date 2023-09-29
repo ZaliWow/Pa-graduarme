@@ -89,10 +89,10 @@ const navigate = useNavigate()
           const idRegistroFive= crypto.randomUUID()
           const fechaActual = new Date();
 
-          const puntajeActual = await axios.get(`http://localhost:4000/registro/estudiantes/${user.id_estudiante}`) 
+          const puntajeActual = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiantes/${user.id_estudiante}`) 
           var NewPuntaje= parseInt(puntajeActual.data[0].puntaje)
 
-          const result = await fetch('http://localhost:4000/datos/examen',{
+          const result = await fetch('https://proyecto-backend-william-david-morales.onrender.com/datos/examen',{
             method:'POST',
             body: JSON.stringify({
               id_examen:idExamen,
@@ -101,7 +101,7 @@ const navigate = useNavigate()
             }),
             headers:{"Content-Type":"application/json"}
           })
-          const resOne = await fetch('http://localhost:4000/examen/preguntas',{
+          const resOne = await fetch('https://proyecto-backend-william-david-morales.onrender.com/examen/preguntas',{
             method:'POST',
             body: JSON.stringify({
             id_registro_examen:idRegistroOne,
@@ -112,7 +112,7 @@ const navigate = useNavigate()
             }),
             headers:{"Content-Type":"application/json"}
           })
-          const resTwo = await fetch('http://localhost:4000/examen/preguntas',{
+          const resTwo = await fetch('https://proyecto-backend-william-david-morales.onrender.com/examen/preguntas',{
             method:'POST',
             body: JSON.stringify({
               id_registro_examen:idRegistroTwo,
@@ -122,7 +122,7 @@ const navigate = useNavigate()
             }),
             headers:{"Content-Type":"application/json"}
           })
-          const resThree = await fetch('http://localhost:4000/examen/preguntas',{
+          const resThree = await fetch('https://proyecto-backend-william-david-morales.onrender.com/examen/preguntas',{
             method:'POST',
             body: JSON.stringify({
               id_registro_examen:idRegistroThree,
@@ -132,7 +132,7 @@ const navigate = useNavigate()
             }),
             headers:{"Content-Type":"application/json"}
           })
-          const resFor = await fetch('http://localhost:4000/examen/preguntas',{
+          const resFor = await fetch('https://proyecto-backend-william-david-morales.onrender.com/examen/preguntas',{
             method:'POST',
             body: JSON.stringify({
               id_registro_examen:idRegistroFor,
@@ -143,7 +143,7 @@ const navigate = useNavigate()
             }),
             headers:{"Content-Type":"application/json"}
           })
-          const resFive = await fetch('http://localhost:4000/examen/preguntas',{
+          const resFive = await fetch('https://proyecto-backend-william-david-morales.onrender.com/examen/preguntas',{
             method:'POST',
             body: JSON.stringify({
               id_registro_examen:idRegistroFive,
@@ -184,7 +184,7 @@ const navigate = useNavigate()
           }
           console.log(NewPuntaje)
              
-          const resUpdate = await fetch(`http://localhost:4000/registro/estudiante/puntaje/${user.id_estudiante}`,{
+          const resUpdate = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiante/puntaje/${user.id_estudiante}`,{
               method:'PUT',
               body: JSON.stringify({
                 puntaje:NewPuntaje

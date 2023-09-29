@@ -55,7 +55,7 @@ const [verExamen, setVerExamen] = useState(false)
 
         const handleRanking = async(e)=>{
           e.preventDefault()
-          const res = await axios.get('http://localhost:4000/rank/estudiantes')
+          const res = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/rank/estudiantes')
           for(let i=0; res.data.length > i; i++ )
           setRankEstudiantes(rankEstudiantes => [...rankEstudiantes, res.data[i]])
           navigate("/ver/ranking")

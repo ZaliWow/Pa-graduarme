@@ -50,9 +50,9 @@ const handleBackCurso =(e)=>{
 }
 const handleEstudiantesCurso = async (idCurso)=>{
     try {
-       const res = await axios.get(`http://localhost:4000/students/curso/${idCurso}`)
+       const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/students/curso/${idCurso}`)
        for(let i=0; res.data.length > i; i++ ){
-        const result = await axios.get(`http://localhost:4000/registro/estudiantes/${res.data[i].id_estudiante}`)
+        const result = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/http://localhost:4000/registro/estudiantes/${res.data[i].id_estudiante}`)
         setListaEstudiantes(listaEstudiantes => [...listaEstudiantes, res.data[i]])
         setInfoEstudiantes(infoEstudiantes  => [...infoEstudiantes, result.data[0]])
         
@@ -71,7 +71,7 @@ const handleRevisar = async (idEstudiante)=>{
   setMostrarEstudiantes(false)
 
     try {
-        const res = await  axios.get(`http://localhost:4000/datos/examenes/estudiante/${idEstudiante}`)
+        const res = await  axios.get(`https://proyecto-backend-william-david-morales.onrender.com/datos/examenes/estudiante/${idEstudiante}`)
         for(let i=0; res.data.length > i; i++ ){
             setListaRevisar(listaRevisar  => [...listaRevisar, res.data[i]])   
             

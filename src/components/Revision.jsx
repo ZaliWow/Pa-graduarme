@@ -30,7 +30,7 @@ const [infoRevisar, setInfoRevisar] = useState([{
 const handleInfoRevisar = async (IdExamen)=>{
     
     try {
-        const res = await axios.get(`http://localhost:4000/examen/info/preguntas/${IdExamen}`)
+        const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/examen/info/preguntas/${IdExamen}`)
         console.log(res.data)
         for(let i=0; res.data.length > i; i++ )
             setInfoRevisar(infoRevisar  => [...infoRevisar, res.data[i]])
