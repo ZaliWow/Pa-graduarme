@@ -4,8 +4,8 @@
     margin-right: 4%;
 }
 .estiloranking th {
-    background-color: #ffc107; /* Color de fondo */
-    color: #333; /* Color del texto */
+    background-color: #000000;
+    color: white; /* Color de fondo */ /* Color del texto */
     font-weight: bold; /* Texto en negrita */
     padding: 10px; /* Espaciado interno */
     text-align: center; /* Alineación del texto */
@@ -25,9 +25,10 @@ td:first-child {
     color: #f5f4f4; 
 }
 th:first-child {
-    background-color: #e0e0df; 
+    background-color: #000000;
+    color: white;
     font-weight: bold;
-    color: #000000; 
+  
     text-align: center;
     border-bottom: 0px solid #000000;
 }
