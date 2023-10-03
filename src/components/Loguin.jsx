@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import  axios  from 'axios';
 import { Container } from 'react-bootstrap';
 import { useRef } from 'react';
+import { CircularProgress } from '@mui/material';
 export  function Loguin({
   setLogueado,
   setUsuario,
@@ -25,7 +26,7 @@ export  function Loguin({
 }) {
   
 const tipoUsuarioRef = useRef(null)
-
+const [loading, setLoading]= useState(false)
 const [correoEstudiante, setCorreoEstudiante]=useState('')
 const [contraEstudiante, setContraEstudiante]=useState('')
 const [idEstudiante, setIdEstudiante]=useState('')
@@ -52,6 +53,7 @@ const handleInfo = (e)=>{
 //funcion para hacer pruebas sin la base de datos ni el backend operando porque que fastidio
 const loguearse =(e)=>{
   e.preventDefault()
+  
   if (tipoUsuarioRef.current.value==="estudiante"){
     setLogueado(true)
     navigate('/home')
@@ -71,6 +73,7 @@ const loguearse =(e)=>{
 // ES LA QUE VALIDA LAS CREDENCIALES DEL USUARIO QUE INTENTA LOGUEARSE
 
 const handleSubmit = async(e)=>{
+  setLoading(true)
   e.preventDefault()
 
 if (tipoUsuarioRef.current.value==="estudiante") {
@@ -157,7 +160,7 @@ try {
   
 }
     
-    
+    setLoading(false)
 
   }
 
@@ -232,8 +235,9 @@ console.log(cursos)
     <Button 
     variant="dark" 
     type='submit'
+    disabled={loading === true}
     >
-      Log in!
+     {loading ? <CircularProgress size={24} color="inherit"/> : 'log in!'}
     </Button>
 
     
