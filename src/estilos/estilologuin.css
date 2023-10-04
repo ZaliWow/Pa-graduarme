@@ -10,6 +10,7 @@
     box-shadow: 7px 13px 37px #393939;
     padding: 20px 30px;
     color: rgb(255, 255, 255);
+    border-radius: 5%;
     
 }
 @media screen and (max-width: 480px){

@@ -21,7 +21,7 @@
 .estiloExamen img[src=""]{
     display: none;
 }
-@media (min-width: 449px) and (max-width: 449px) {
+@media (min-width: 350px) and (max-width: 449px) {
     .estiloExamen img {
         max-width: 250px;
         max-height: 140px;

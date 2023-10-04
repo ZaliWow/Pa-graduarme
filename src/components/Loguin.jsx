@@ -104,11 +104,12 @@ if (tipoUsuarioRef.current.value==="estudiante") {
       
       else{
         setError(true)
+        setLoading(false)
       }
     
     }  
    } catch (error) {
-    console.log(error)
+    setLoading(false)
    }
 } else if (tipoUsuarioRef.current.value==="docente") {
   try{
@@ -136,11 +137,12 @@ for(let i=0;resdos.data.length > i; i++){
 
 }else{
   setError(true)
+  setLoading(false)
 }
 
 
   } catch (error){
-    console.log(error)
+    setLoading(false)
   }
 }else if(tipoUsuarioRef.current.value==="Admin"){
 try {
@@ -153,10 +155,11 @@ try {
     navigate('/home') }
     else{
       setError(true)
+      setLoading(false)
     }}
 
 } catch (error) {
-
+  setLoading(false)
   
 }
     

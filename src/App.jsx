@@ -146,7 +146,7 @@ function App() {
     element={<Registro_Estudiantes Logueado={logueado}/>}></Route>
     <Route 
     path="/home" 
-    element={<Home user={usuario} Logueado={logueado} insignias={insignias} infoInsignias={infoInsignias} />}></Route>
+    element={<Home user={usuario} Logueado={logueado} insignias={insignias} infoInsignias={infoInsignias} permisoAdmin={permisoAdmin} permisoDocente={permisoDocente}/>}></Route>
     <Route 
     path="/crear/pregunta" 
     element={<Crear_Pregunta Logueado={logueado}/>}></Route>
