@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Hacer_Examen } from './Hacer_examen';
 import { useState } from 'react';
 import { Barra_Estudiante } from './Barra_Estudiante';
+import { LoadingUX } from "./LoadingUX"
 
 
 
@@ -18,7 +19,7 @@ export function Advertencia_Estudiantes({
     user,
     setRankEstudiantes
 }) {
-
+    const [loading, setLoading]=useState(false)
     const navigate = useNavigate()
     const handleClose = () => setMostrarAdvertencia(false);  
     
@@ -62,9 +63,55 @@ export function Advertencia_Estudiantes({
     id_abierta: "",
     respuesta_correcta: ""},
     ])
-
+    const handleResetExamen = () => {
+      setVerExamen(false)
+      setAbiertas([
+        {
+      id_pregunta: "",
+      text_pregunta: "",
+      dificultad_pregunta: "",
+      tipo: "",
+      puntaje_pregunta: "",
+      link_foto_pregunta: "",
+      id_abierta: "",
+      respuesta_correcta: ""},
+      ])
+      setFalsoVerdaderos([
+        {
+          id_pregunta: "",
+          text_pregunta: "",
+          dificultad_pregunta: "",
+          tipo: "",
+          puntaje_pregunta: "",
+          link_foto_pregunta: "",
+          id_pregunta_falso_verdadero: "",
+          respuesta_correcta: ""
+        },
+      ])
+      setMultiples([
+        {
+          id_pregunta: "",
+      text_pregunta: "",
+      dificultad_pregunta: "",
+      tipo: "",
+      puntaje_pregunta: "",
+      link_foto_pregunta: "",
+      id_multiple: "",
+      opcion_a: "",
+      opcion_b: "",
+      opcion_c: "",
+      opcion_d: "",
+      respuesta_correcta: ""
+        },
+      ])
+      navigate("/home")
+      setMostrarAdvertencia(true)
+    }
 
     const handleCrearExamen = async(e) => {
+    
+      setMostrarAdvertencia(false)
+      setLoading(true)
       e.preventDefault()
         try {
            
@@ -83,9 +130,9 @@ export function Advertencia_Estudiantes({
           
           navigate('/hacer/examen')
           setVerExamen(true)
-          setMostrarAdvertencia(false)
-          setVerRank(false)
           
+          setVerRank(false)
+          setLoading(false)
           
         } catch (error) {
           console.log("error")
@@ -93,6 +140,8 @@ export function Advertencia_Estudiantes({
     }
 
     const handleCrearExamenFacil = async(e) => {
+      setMostrarAdvertencia(false)
+      setLoading(true)
       e.preventDefault()
       try {
          
@@ -111,9 +160,9 @@ export function Advertencia_Estudiantes({
         
         navigate('/hacer/examen')
         setVerExamen(true)
-        setMostrarAdvertencia(false)
-        setVerRank(false)
         
+        setVerRank(false)
+        setLoading(false)
         
       } catch (error) {
         console.log("error")
@@ -121,6 +170,8 @@ export function Advertencia_Estudiantes({
     }
 
     const handleCrearExamenMedia = async(e) => {
+      setMostrarAdvertencia(false)
+      setLoading(true)
       e.preventDefault()
       try {
          
@@ -139,9 +190,9 @@ export function Advertencia_Estudiantes({
         
         navigate('/hacer/examen')
         setVerExamen(true)
-        setMostrarAdvertencia(false)
+       
         setVerRank(false)
-        
+        setLoading(false)
         
       } catch (error) {
         console.log("error")
@@ -187,9 +238,11 @@ export function Advertencia_Estudiantes({
     setVerExamen={setVerExamen}
     user={user}
     setRankEstudiantes={setRankEstudiantes}
+    handleResetExamen={handleResetExamen}
 
     
     />
+    <LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>
       </>
     )
 }

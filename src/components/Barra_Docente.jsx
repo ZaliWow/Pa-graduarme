@@ -13,6 +13,7 @@ import { Curso } from './Curso';
 export function Barra_Docente({setLogueado, HandleLogout}) {
 
     const [loading, setLoading]= useState(false)
+    const [loadingCurso, setLoadingCurso]=useState(false)
     const handleLogout = (e)=>{
         setLogueado(false)
         navigate("/")
@@ -34,6 +35,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
         ])
 
         const handleRanking = async(e)=>{
+          handleHome()
           setLoading(true)
           try {
             e.preventDefault()
@@ -85,7 +87,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
           },])
         }
         const handleCurso = (e) =>{
-          navigate("/curso")
+          setLoadingCurso(true)
           setVerRank(false)
           setRankEstudiantes([{
             id_estudiante: "",
@@ -95,6 +97,8 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
             puntaje: "",
             contra_estudiante: ""
           },])
+          navigate("/curso")
+          setLoadingCurso(false)
         }
         
 
@@ -115,7 +119,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
           disabled={loading===true}
           onClick={handleRanking}>{loading ? "Obteniendo...": "Ver Ranking"}</Nav.Link>
         <Nav.Link onClick={handleCurso}
-          >Cursos</Nav.Link>
+          >{loadingCurso ? "Obteniendo...": "Mis Cursos"}</Nav.Link>
         <Nav.Link onClick={handleRegistroAlumnos}>Registrar Estudiante</Nav.Link>
           
         </Nav>

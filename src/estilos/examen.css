@@ -1,6 +1,6 @@
 .estiloExamen{ 
     position: relative;
-    width: 60%;
+    width: 80%;
     min-height: 100%;
     background-color: #000000;
     color: white;
@@ -12,16 +12,19 @@
     box-shadow: 7px 13px 37px #393939;
     padding: 20px 30px;
     
+    
 }
 .estiloExamen img{
-    height: 200px;
-    width: 400px;
-    padding: 20px 20px;
+    height: 120%;
+    width: 100%;
+    padding: 0px 20px;
+    margin-left: 0%;
+    margin-right:0% ;
 }
 .estiloExamen img[src=""]{
     display: none;
 }
-@media (min-width: 350px) and (max-width: 449px) {
+@media (max-width: 400px)  {
     .estiloExamen img {
         max-width: 250px;
         max-height: 140px;
@@ -66,4 +69,18 @@
         max-height: 140px;
         padding: 20px 20px; 
     }
+}
+
+.estilobotoncambioexamen{
+    margin-top: 2%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.estiloFullbody{
+    height: 90%;
+    width: 80%;
+    padding: 20px 20px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
 }

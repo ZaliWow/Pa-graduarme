@@ -29,7 +29,9 @@ export function Ver_ranking({Logueado, rankEstudiantes, verRank}) {
       </thead>
      
       {rankEstudiantes.slice(1).map((element, index )=>( 
-      <tbody>
+      <tbody
+      controls
+      key={index}>
      
           <tr>
           <td>{index + 1}</td>

@@ -58,9 +58,13 @@ export function Crear_Pregunta({Logueado}) {
         >Lets go!</Button>
       </Card.Body>
     </Card>
-
-
     </div>
+    <br></br>
+    <div className='footer'>
+        <br />
+       <p>&copy; 2023 Your Company. All rights reserved.</p>
+    
+       </div>
     </>
   )
 }

@@ -18,7 +18,8 @@ export function Hacer_Examen({
     setFalsoVerdaderos,
     setVerExamen,
     user,
-    setRankEstudiantes
+    setRankEstudiantes,
+    handleResetExamen
  
 }){
 
@@ -259,7 +260,10 @@ const proba = ()=> {
     
     if(verExamen===true )return(
         <div >
- 
+          <div className="estilobotoncambioexamen">
+          <Button variant="outline-danger" onClick={handleResetExamen}>Oops, Elegir otra dificultad</Button>
+          </div>
+ <div className="estiloFullbody">
         <div className="estiloExamen">
         <img src={abiertas[1].link_foto_pregunta} alt="" />
             <h6>{abiertas[1].text_pregunta}</h6>
@@ -278,7 +282,7 @@ const proba = ()=> {
         <div className="estiloExamen">
 
           
-        <img   src={multiples[1].link_foto_pregunta} alt="" />
+        <img   src={multiples[1].link_foto_pregunta} alt="Error en la selección de fotos de apoyo (es posible que el docente haya elegido un archivo incompatible)" />
         <h6>{multiples[1].text_pregunta}</h6>
         <Form >
         <Form.Check
@@ -318,6 +322,7 @@ const proba = ()=> {
           />
           
 </Form>
+
         </div>
 
         <div className="estiloExamen">
@@ -390,9 +395,18 @@ const proba = ()=> {
 
 <div className="estiloExamen" >
     <Button variant="dark" onClick={handleTerminarExamen}> Terminar examen</Button>
+   
     
     <br />
 </div>
+
+</div>
+<br />
+<div className='footer'>
+        <br />
+       <p>&copy; 2023 Your Company. All rights reserved.</p>
+    
+       </div>
         </div>
     )  
 }

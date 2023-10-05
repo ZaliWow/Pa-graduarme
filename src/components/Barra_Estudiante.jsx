@@ -16,7 +16,7 @@ export function Barra_Estudiante({setLogueado, user, setInfoInsignias, setInsign
 
 const [mostrarAdvertencia,setMostrarAdvertencia]= useState(false)
 const [verExamen, setVerExamen] = useState(false)
-
+const [loading, setLoading]= useState(false)
     const handleLogout = (e)=>{
         setLogueado(false)
         navigate("/")
@@ -54,13 +54,22 @@ const [verExamen, setVerExamen] = useState(false)
         ])
 
         const handleRanking = async(e)=>{
+          handleHome()
+          setLoading(true)
           e.preventDefault()
+          try {
           const res = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/rank/estudiantes')
           for(let i=0; res.data.length > i; i++ )
           setRankEstudiantes(rankEstudiantes => [...rankEstudiantes, res.data[i]])
           navigate("/ver/ranking")
           setVerRank(true)
           setVerExamen(false)
+         
+          } catch (error) {
+            console.log(error)
+          }
+          setLoading(false)
+          
         }
 
         const  handleTomarPrueba = (e) =>{
@@ -106,7 +115,7 @@ const [verExamen, setVerExamen] = useState(false)
               <Nav.Link 
                 onClick={handleHome}>Home</Nav.Link>
               <Nav.Link 
-                onClick={handleRanking}>Ver Ranking</Nav.Link>
+                onClick={handleRanking}>{loading ? "Loading...": "Ver Ranking"}</Nav.Link>
                <Nav.Link 
                 onClick={handleAdvertencia}>Tomar prueba</Nav.Link> 
               </Nav>
