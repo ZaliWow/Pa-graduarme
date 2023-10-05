@@ -7,12 +7,16 @@ import { initializeApp } from 'firebase/app';
 import { getStorage,ref ,uploadBytes, getDownloadURL} from "firebase/storage";
 import { useState } from "react";
 import { Preview_Multiple } from "./Preview_Multiple";
+import { CircularProgress } from '@mui/material';
+import { LoadingUX } from "./LoadingUX";
 
 export function Crear_multiple_respuesta({}) {
 
 
   const [mostrarPreview, setMostrarPreview]= useState(false) 
-// hooks para capturar los imputs del usuario
+// para ux
+const [loading, setLoading]=useState(false)
+  // hooks para capturar los imputs del usuario
     const navigate = useNavigate()
     const dificultadMultipleRef=useRef(null);
     const preguntaMultipleRef = useRef(null);
@@ -93,6 +97,7 @@ const handleFileChange = (event) => {
   
   const handleupload = async (event) =>{
     if(inputFoto !== null){
+      setLoading(true)
     event.preventDefault()
       try {
        
@@ -123,7 +128,10 @@ const handleFileChange = (event) => {
       } catch (error) {
           console.error('Error al subir el archivo', error)
           alert('Error interno por favor intente mas tarde')
-      }} else if(inputFoto === null){
+      }
+    setLoading(false)
+    } else if(inputFoto === null){
+      setLoading(true)
         event.preventDefault()
         const idPregunta = crypto.randomUUID()
           setInputPregunta({
@@ -144,7 +152,7 @@ const handleFileChange = (event) => {
           })
           setMostrarPreview(true)
       }
-  
+  setLoading(false)
 };
     const handleBack=(evento)=>{
       navigate('/crear/pregunta')
@@ -154,6 +162,8 @@ const handleFileChange = (event) => {
 //PARA ENVIAR A LA BASE DE DATOS 
 const handleSubmit= async (e)=>{
   e.preventDefault()
+  setMostrarPreview(false)
+  setLoading(true)
   try {
     const res1 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/preguntas',{
       method:'POST',
@@ -165,10 +175,12 @@ const handleSubmit= async (e)=>{
       body: JSON.stringify(inputMultiple),
       headers:{"Content-Type":"application/json"}
     })
-    setMostrarPreview(false)
+    
   } catch (error) {
     
   }
+  setLoading(false)
+  navigate("/crear/pregunta")
 
 }
 
@@ -269,7 +281,9 @@ return(
        <Button 
        variant="dark"
        onClick={handleupload}
-       >Subir pregunta</Button>
+       disabled={loading === true}
+       >{loading ? 
+        <CircularProgress color="inherit"></CircularProgress>: "Subir pregunta"}</Button>
            <br />
            </form>
            </section>
@@ -281,7 +295,8 @@ return(
        setMostrarPreview={setMostrarPreview}
        confirmarPOST={handleSubmit}
        inputPregunta={inputPregunta}
-       inputMultiple={inputMultiple} />      
+       inputMultiple={inputMultiple} /> 
+       <LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>     
 <br />
 <div className='footer'>
 <br />

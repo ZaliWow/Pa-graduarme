@@ -1,5 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import "../estilos/examen.css"
+import { useState } from 'react';
 
 export function Preview_FV({
     show, 
@@ -22,35 +24,37 @@ return (
         > 
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Modal heading
+              Revisión
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <div className='estilopreview'>
             <h6>Foto soporte de su pregunta</h6>
-            <h4>Los datos a guardar de su pregunta son</h4>  
-             <img
+            <img
              height="200"
              width="400"
              src={inputPregunta.link_foto_pregunta} 
-             alt="Second slide" />
+             alt="La pregunta no cuenta con imagen de apoyo." />
+            <h6>Los datos a guardar de su pregunta son</h6>  
+             
            
         <h6>el id de su pregunta es:</h6>
-        <h4>{inputPregunta.id_pregunta}</h4>
+        <p>{inputPregunta.id_pregunta}</p>
         <h6>su pregunta es:</h6>
-        <h4>{inputPregunta.text_pregunta}</h4>
+        <p>{inputPregunta.text_pregunta}</p>
         <h6>la respuesta a su pregunta es:</h6>
-        <h4>{inputFV.respuesta_correcta}</h4>
+        <p>{inputFV.respuesta_correcta}</p>
         <h6>la dificultad de su pregunta :</h6>
-        <h4>{inputPregunta.dificultad_pregunta}</h4>
+        <p>{inputPregunta.dificultad_pregunta}</p>
         <h6>el puntaje de su pregunta es</h6>
-        <h4>{inputPregunta.puntaje_pregunta}</h4>  
+        <p>{inputPregunta.puntaje_pregunta}</p>  
         <h6>el tipo de pregunta es:</h6>
-        <h4>{inputPregunta.tipo}</h4>
-            
+        <p>{inputPregunta.tipo}</p>
+        </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={handleClose}>Cambiar Algo</Button> 
-            <Button onClick ={confirmarPOST}>Guardar pregunta</Button> 
+            <Button onClick={handleClose} variant="dark">Cambiar Algo</Button> 
+            <Button onClick ={confirmarPOST} variant="dark" >Guardar pregunta</Button> 
           </Modal.Footer>
         </Modal>
       );

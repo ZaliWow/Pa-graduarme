@@ -4,11 +4,17 @@ import '../estilos/estiloregistro.css'
 import { useState, useRef } from "react"
 import { No_loguin } from "./No_loguin"
 import { useNavigate } from "react-router-dom"
+import { CircularProgress } from '@mui/material';
+
+
 export  function Registro_Estudiantes({Logueado}) {
   if(Logueado===false)return (
     <No_loguin />
   )
 
+  // para ux
+  const [loading, setLoading]= useState(false)
+  const [permisoSubmit, setPermisoSubmit]=useState(false)
   //PARA LAS REDIRECCIONES
   const navigate = useNavigate();
 
@@ -28,9 +34,14 @@ export  function Registro_Estudiantes({Logueado}) {
   )
 const idEstudiante = useRef(null)
 const idCurso = useRef(null)
+const nombreRef = useRef(null)
+const apellidoRef = useRef(null)
+const correoRef= useRef(null)
+const contraRef = useRef(null)
   // PARA CONTROLAR EL SUBMIT DEL FORMULARIO
   const handleSubmit = async (e)=>{
   e.preventDefault()
+  setLoading(true)
   try {
     const res = await fetch('https://proyecto-backend-william-david-morales.onrender.com/registro/estudiantes',{
       method:'POST',
@@ -46,7 +57,7 @@ const idCurso = useRef(null)
   } catch (error) {
     console.log("error")
   }
-  
+  setLoading(false)
   }
 
   // PARA LOS CAMBIOS DENTRO DE LOS IMPUTS
@@ -57,6 +68,17 @@ const idCurso = useRef(null)
       id_estudiante: idEstudiante.current.value,
       id_curso:idCurso.current.value 
     })
+    console.log(contraRef.current.value)
+    console.log(nombreRef.current.value)
+    console.log(apellidoRef.current.value)
+    console.log(idCurso.current.value)
+    console.log(idEstudiante.current.value)
+    console.log(correoRef.current.value)
+    if(contraRef.current.value !== "" && nombreRef.current.value !== "" && apellidoRef.current.value !== "" && idCurso.current.value !== "" && idEstudiante.current.value !== "" && correoRef.current.value !== ""){
+      setPermisoSubmit(true)
+    }else{
+      setPermisoSubmit(false)
+    }
   }
   
   
@@ -85,6 +107,7 @@ const idCurso = useRef(null)
         type="text" 
         placeholder="Ingresa el nombre del estudiante"
         onChange={handleChange}
+        ref={nombreRef}
         />
      
       </Form.Group>
@@ -95,6 +118,7 @@ const idCurso = useRef(null)
         type="text" 
         placeholder="Ingresa el apellido del estudiante" 
         onChange={handleChange}
+        ref={apellidoRef}
         />
       </Form.Group>
       
@@ -105,6 +129,7 @@ const idCurso = useRef(null)
         type="email" 
         placeholder="Ingresa correo del estudiante"
         onChange={handleChange}
+        ref={correoRef}
         />
         <Form.Text className="text-muted">
           Los correos electronicos son unicos para cada estudiante.
@@ -132,14 +157,17 @@ const idCurso = useRef(null)
         type="password" 
         placeholder="Asigna una contraseña al estudiante" 
         onChange={handleChange}
+        ref={contraRef}
         />
       </Form.Group>
 <br />
 
       <Button 
       variant="dark"
-      type="submit" >
-        Registrar
+      type="submit" 
+      disabled={permisoSubmit === false || loading=== true}
+      >
+       {loading ? <CircularProgress size={24} color="inherit"/>: 'Registrar'}
       </Button>
         </Form>
     </div>

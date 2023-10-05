@@ -37,3 +37,33 @@
     box-shadow: 7px 13px 37px #393939;
     padding: 20px 30px;
 }
+
+.estilopreview{ 
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    background-color: #000000;
+    color: white;
+   
+    margin-bottom: 3%;
+    
+    border-radius: 5%;
+  
+    padding: 20px 30px;
+    
+}
+.estilopreview img{
+    height: 200px;
+    width: 400px;
+    padding: 20px 20px;
+}
+.estilopreview img[src=""]{
+    display: "Tu pregunta no cuenta con imagen de apoyo";
+}
+@media (min-width: 350px) and (max-width: 449px) {
+    .estilopreview img {
+        max-width: 250px;
+        max-height: 140px;
+        padding: 20px 20px; 
+    }
+}

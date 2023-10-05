@@ -11,6 +11,8 @@ import { Curso } from './Curso';
 
 
 export function Barra_Docente({setLogueado, HandleLogout}) {
+
+    const [loading, setLoading]= useState(false)
     const handleLogout = (e)=>{
         setLogueado(false)
         navigate("/")
@@ -32,6 +34,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
         ])
 
         const handleRanking = async(e)=>{
+          setLoading(true)
           try {
             e.preventDefault()
           const res = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/rank/estudiantes')
@@ -42,7 +45,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
           } catch (error) {
             console.log(error)
           }
-          
+          setLoading(false)
         }
         
         const  handleHome = (e) =>{
@@ -109,7 +112,8 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
         <Nav.Link 
           onClick={handleCrearPregunta}>Crear Pregunta</Nav.Link>
         <Nav.Link 
-          onClick={handleRanking}>Ver Ranking</Nav.Link>
+          disabled={loading===true}
+          onClick={handleRanking}>{loading ? "Obteniendo...": "Ver Ranking"}</Nav.Link>
         <Nav.Link onClick={handleCurso}
           >Cursos</Nav.Link>
         <Nav.Link onClick={handleRegistroAlumnos}>Registrar Estudiante</Nav.Link>
@@ -125,7 +129,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
     </Container>
   </Navbar>
   
-<Ver_ranking rankEstudiantes={rankEstudiantes}  verRank={verRank}/>
+<Ver_ranking  rankEstudiantes={rankEstudiantes}  verRank={verRank}/>
 <Curso />
  </>
     )

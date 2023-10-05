@@ -41,23 +41,19 @@ export function DataRevisar({
         <Modal.Body>
 <div>
    
-    <p>------------------------------------------------------------</p>
+   
     <div >
         {infoRevisar.slice(1).map((element, index )=>(
                 
         <div className='estiloRevisar'
          controls
          key={index }>       
-            <h6
-                controls
-                key={index}>  
-                Pregunta Numero : {index + 1}
-            </h6>
+            
               <h6>Pregunta :</h6>
             <p>{element.text_pregunta}</p>
             <h6>Respuesta del estudiante :</h6>
             <p>{element.respuesta_estudiante}</p>
-            <p>------------------------------------------------------------</p>
+            
         </div>                       
      ))}
     </div>

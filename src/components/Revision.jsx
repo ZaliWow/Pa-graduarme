@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap"
 import { useState } from "react"
 import axios from "axios"
 import { DataRevisar } from "./DataRevisar"
+import { CircularProgress } from '@mui/material';
+
 
 export function Revision({
     mostrarRevision,
@@ -13,6 +15,7 @@ export function Revision({
 }){
 
 const [mostrarAdvertencia,setMostrarAdvertencia]= useState(false)
+const [loading, setLoading]= useState(false)
 const [infoRevisar, setInfoRevisar] = useState([{
     id_registro_examen: "",
     id_pregunta: "",
@@ -28,7 +31,7 @@ const [infoRevisar, setInfoRevisar] = useState([{
 },
 ])
 const handleInfoRevisar = async (IdExamen)=>{
-    
+    setLoading(true)
     try {
         const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/examen/info/preguntas/${IdExamen}`)
         console.log(res.data)
@@ -40,6 +43,7 @@ const handleInfoRevisar = async (IdExamen)=>{
     } catch (error) {
         console.log(error)
     }
+    setLoading(false)
 }
 
 const handleproba = ()=>{
@@ -81,7 +85,7 @@ const handleproba = ()=>{
 
       
 
-         <Button className="botonBack" variant="dark" onClick={()=> handleInfoRevisar(element.id_examen)}>Ver Examen</Button>   
+         <Button disabled={loading===true} className="botonBack" variant="dark" onClick={()=> handleInfoRevisar(element.id_examen)}>{loading ? <CircularProgress color="inherit"></CircularProgress> : "ver examen"}</Button>   
   </div>            
              
    

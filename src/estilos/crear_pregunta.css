@@ -13,3 +13,10 @@
     border-radius: 5%;
     
 }
+.estiloUX{
+    display: grid;
+    place-items: center;
+    justify-content:flex-start;
+    margin-left: 5%;
+    font-weight: bold;
+}

@@ -4,6 +4,8 @@ import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { getStorage,ref ,uploadBytes, getDownloadURL} from "firebase/storage";
+import { CircularProgress } from '@mui/material';
+import { LoadingUX } from './LoadingUX';
 
 import {Preview_FV} from './Preview_FV'
 
@@ -11,6 +13,9 @@ import 'firebase/storage';
 
 export function Crear_falso_verdadero({}) {
     const navigate = useNavigate()
+    //para ux
+    const [permisoSubmit, setPermisoSubmit]=useState(false)
+    const [loading, setLoading]=useState(false)
      // Aqui se crearon las variables para guardar la informacion de los inputs
     // realizada por el docente
     const preguntaVFRef =useRef(null);
@@ -27,6 +32,8 @@ export function Crear_falso_verdadero({}) {
 
     //handleSubmit para subir la pregunta a la bdd
     const handleSubmit= async (e)=>{
+      setMostrarPreview(false)
+      setLoading(true)
       e.preventDefault()
 
       try {
@@ -45,10 +52,12 @@ export function Crear_falso_verdadero({}) {
 
         })
       
-        setMostrarPreview(false)
+       
       } catch (error) { 
         console.log("error")
       }
+      setLoading(false)
+      navigate("/crear/pregunta")
     }
 
     // VolverAlhome cierra el componente de crear pregunta abierta y abre el componente del home
@@ -115,6 +124,7 @@ const handleFileChange = (event) => {
 };
 const handleupload = async (event) =>{
   if(inputFoto !== null){
+    setLoading(true)
 event.preventDefault()
   try {
    
@@ -143,7 +153,10 @@ event.preventDefault()
   } catch (error) {
       console.error('Error al subir el archivo', error)
       alert('Error interno por favor intente mas tarde')
-  }} else if(inputFoto === null){
+  }
+  setLoading(false)
+} else if(inputFoto === null){
+  setLoading(true)
     event.preventDefault()
     const idPregunta = crypto.randomUUID()
     setInputPregunta({
@@ -159,7 +172,7 @@ event.preventDefault()
       id_pregunta_falso_verdadero:idPregunta,
           respuesta_correcta:respuestaVFRef.current.value
      })
-    
+    setLoading(false)
 setMostrarPreview(true)
      
   }
@@ -232,7 +245,8 @@ setMostrarPreview(true)
         <Button 
         variant="dark"
         onClick={handleupload}
-        >Subir pregunta</Button>
+        disabled={permisoSubmit===true || loading===true}
+        >{loading ? <CircularProgress color="inherit"></CircularProgress> : "Subir Pregunta"}</Button>
         <br />
        
                 </form>
@@ -247,6 +261,7 @@ setMostrarPreview(true)
         inputFV={inputFV}
         urlFoto={urlFoto}
         />   
+        <LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>
         </div> 
         <br />
         <div className='footer'>

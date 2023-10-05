@@ -6,6 +6,8 @@ import {useState} from 'react'
 import { initializeApp } from 'firebase/app';
 import { getStorage,ref ,uploadBytes, getDownloadURL} from "firebase/storage";
 import { Preview_Abierta } from './Preview_Abierta';
+import { LoadingUX } from './LoadingUX';
+import { CircularProgress } from '@mui/material';
 
 
 export function Crear_respuesta_abierta({}) {
@@ -20,6 +22,8 @@ export function Crear_respuesta_abierta({}) {
 const [idFoto, setIDFoto]= useState()
 const [inputFoto, setInputFoto] = useState(null)
 const [urlFoto, setUrlFoto] = useState()
+//para ux
+const [loading, setLoading]=useState(false)
     // hook para body de la pregunta 
     const [inputPregunta, setInputPregunta] = useState({
       id_pregunta:"",
@@ -82,6 +86,7 @@ const handleFileChange = (event) => {
 
 
     if(inputFoto!==null){
+      setLoading(true)
     event.preventDefault()
       try {
        
@@ -107,7 +112,10 @@ const handleFileChange = (event) => {
       } catch (error) {
           console.error('Error al subir el archivo', error)
           alert('Error interno por favor intente mas tarde')
-      }} else if(inputFoto === null){
+      }
+    setLoading(false)
+    } else if(inputFoto === null){
+      setLoading(true)
         event.preventDefault()
         const idPregunta = crypto.randomUUID()
         setInputPregunta({
@@ -122,6 +130,7 @@ const handleFileChange = (event) => {
           id_abierta:idPregunta,
           respuesta_correcta:respuestaCorrectaRef.current.value
         })
+        setLoading(false)
         setMostrarPreview(true)
       }
 
@@ -134,6 +143,8 @@ const handleFileChange = (event) => {
     //realizados por el docente ademas cierra el componente de crear pregunta abierta
     // y regresa al elegir pregunta(crearpregunta)
     const handleSubmit = async (e)=>{
+      setMostrarPreview(false)
+      setLoading(true)
       e.preventDefault()
       try {
         const res1 = await fetch('https://proyecto-backend-william-david-morales.onrender.com/preguntas',{
@@ -146,12 +157,12 @@ const handleFileChange = (event) => {
           body: JSON.stringify(inputAbierta),
           headers:{"Content-Type":"application/json"}
         })
-        
-        setMostrarPreview(false)
+      
       } catch (error) {
         console.log("error")
       }
-        
+          
+       setLoading(false)
     } 
     const handleBack=(evento)=>{
       navigate('/crear/pregunta')
@@ -228,7 +239,8 @@ const handleFileChange = (event) => {
               <Button 
         variant="dark"
         onClick={handleupload}
-        >Subir pregunta</Button>
+        disabled={loading===true}
+        >{loading ? <CircularProgress color="inherit"></CircularProgress> :"Subir Pregunta"}</Button>
         <br />
 
 
@@ -244,6 +256,7 @@ const handleFileChange = (event) => {
         inputPregunta={inputPregunta}
         inputAbierta={inputAbierta}
         confirmarPOST={handleSubmit} />
+        <LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>
         <div className='footer'>
         <br />
         <p>&copy; 2023 Your Company. All rights reserved.</p>

@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useState } from "react"
 import { Revision } from "./Revision"
 
+import { LoadingUX } from "./LoadingUX"
+
 export function Curso({userDocente,
 logueado,
 permisoDocente,
@@ -12,6 +14,9 @@ cursos
 }) {
 const [mostrarEstudiantes, setMostrarEstudiantes] = useState(false)
 const [mostrarRevision, setMostrarRevision] = useState(false)
+const [loading, setLoading] = useState(false)
+
+
 const [listaRevisar, setListaRevisar] = useState([
 {
     id_examen: "",
@@ -49,6 +54,7 @@ const handleBackCurso =(e)=>{
     setMostrarEstudiantes(false)
 }
 const handleEstudiantesCurso = async (idCurso)=>{
+    setLoading(true)
     try {
        const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/students/curso/${idCurso}`)
        for(let i=0; res.data.length > i; i++ ){
@@ -63,12 +69,13 @@ const handleEstudiantesCurso = async (idCurso)=>{
     } catch (error) {
        console.log(error)
     }
+    setLoading(false)
   
 }
   
 const handleRevisar = async (idEstudiante)=>{
- setMostrarRevision(true)
-  setMostrarEstudiantes(false)
+    setLoading(true)
+ 
 
     try {
         const res = await  axios.get(`https://proyecto-backend-william-david-morales.onrender.com/datos/examenes/estudiante/${idEstudiante}`)
@@ -79,6 +86,9 @@ const handleRevisar = async (idEstudiante)=>{
     } catch (error) {
         console.log(error)
     }
+    setLoading(false)
+    setMostrarRevision(true)
+  setMostrarEstudiantes(false)
 }
 
     if(logueado === true && mostrarEstudiantes===false && mostrarRevision===false)return(
@@ -107,7 +117,7 @@ const handleRevisar = async (idEstudiante)=>{
        
        </h6>
        <p> {element.descripcion_grado}</p>
-       <Button variant="dark" id="idCursos" onClick={() => handleEstudiantesCurso(element.id_curso)}>Obtener Estudiantes</Button>
+       <Button disabled={loading===true} variant="dark" id="idCursos" onClick={() => handleEstudiantesCurso(element.id_curso)}>{loading ? 'loading' : 'Cargar estudiantes'}</Button>
     </div>            
     
                
@@ -115,6 +125,7 @@ const handleRevisar = async (idEstudiante)=>{
       ))}
 
             </div>
+            <LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>
         </div>
     )
     if(logueado ===false) return(
@@ -151,7 +162,7 @@ const handleRevisar = async (idEstudiante)=>{
        <p>Correo_estudiante : {element.apellido_estudiante}</p> 
        <p>Contraseña_estudiante : {element.contra_estudiante}</p>
 
-         <Button onClick={() => handleRevisar(element.id_estudiante)} className="botonBack" variant="dark">Ver pruebas</Button>   
+         <Button onClick={() => handleRevisar(element.id_estudiante)} className="botonBack" variant="dark" disabled={loading===true}>{loading ? 'loading' : 'Ver examenes'}</Button>   
   </div>            
              
    
@@ -162,6 +173,7 @@ const handleRevisar = async (idEstudiante)=>{
      mostrarRevision={mostrarRevision} 
      setMostrarRevision={setMostrarRevision}
       /> 
+      <LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>
         </div>
     )
 
