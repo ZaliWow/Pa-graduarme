@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { Ver_ranking } from './Ver_ranking';
 import { useState } from 'react';
 import { Medallas } from './medallas';
+import {LoadingUX} from './LoadingUX'
 import axios from "axios"
 
 
 
 export function Barra_Admin({setLogueado, HandleLogout}) {
-
+  const navigate = useNavigate();
+  const [loading, setLoading]= useState(false)
     const [verRank, setVerRank] = useState(false)
     const [verMedallas, setVerMedallas] = useState(false)
     const [rankEstudiantes, setRankEstudiantes] = useState([
@@ -49,19 +51,24 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
         navigate("/Docentes")
     }
     const handleVerRanking= async (e)=>{
-        navigate("/ver/ranking")
+      handleHome()
+     
+      setLoading(true)
+        
         try {
             e.preventDefault()
           const res = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/rank/estudiantes')
           for(let i=0; res.data.length > i; i++ )
           setRankEstudiantes(rankEstudiantes => [...rankEstudiantes, res.data[i]])
-          navigate("/ver/ranking")
           setVerRank(true)
+      navigate("/ver/ranking")
           setVerMedallas(false)
           } catch (error) {
             console.log(error)
           }
-
+      setLoading(false)
+      
+      
     }
     const handleCursos = async (e)=>{
       setRankEstudiantes([{
@@ -75,6 +82,20 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
       setVerRank(false)
       setVerMedallas(false)
       navigate("/gestion/cursos")
+    }
+    const handleHome= async (e)=>{
+      setVerRank(false)
+      setVerMedallas(false)
+      navigate("/home")
+      setRankEstudiantes([{
+        id_estudiante: "",
+        nombre_estudiante: "",
+        apellido_estudiante: "",
+        correo_estudiante: "",
+        puntaje: "",
+        contra_estudiante: ""
+      },])
+      
     }
     const handleEstudiantes = async (e)=>{
       setRankEstudiantes([{
@@ -90,6 +111,8 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
       navigate("/gestionar/estudiantes")
     }
     const handleMedallas = async (e)=>{
+      handleHome()
+      setLoading(true)
       navigate("/medallas")
       try {
       e.preventDefault()
@@ -103,9 +126,10 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
       } catch (error) {
         console.log(error)
       }
+      setLoading(false)
     }
     
-        const navigate = useNavigate();
+       
     return(
         <>
         <Navbar bg="dark" color="white" expand="lg" variant="dark">
@@ -114,7 +138,9 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-              <Nav.Link onClick={handleVerRanking}>Ver Ranking</Nav.Link>
+              <Nav.Link 
+          disabled={loading===true}
+          onClick={handleVerRanking}>{loading ? "Obteniendo...": "Ver Ranking"}</Nav.Link>
               <Nav.Link onClick={handleDocente}>Docente</Nav.Link>
               <Nav.Link onClick={handleCursos}>Cursos</Nav.Link>
               <Nav.Link onClick={handleEstudiantes}>Estudiantes</Nav.Link>
@@ -132,7 +158,7 @@ export function Barra_Admin({setLogueado, HandleLogout}) {
         </Navbar>
         <Ver_ranking rankEstudiantes={rankEstudiantes}  verRank={verRank}/>
         <Medallas rankEstudiantes={rankEstudiantes}  verMedallas={verMedallas} setVerMedallas={setVerMedallas}/>
-
+<LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>
        </>
     )
 }

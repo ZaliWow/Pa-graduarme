@@ -3,12 +3,17 @@ import '../estilos/medallas.css'
 import { Button } from "react-bootstrap"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { LoadingUX } from "./LoadingUX"
+import { useState } from "react"
 
 
 export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, setVerMedallas}) {
-
+  const [loading, setLoading]= useState(false)
+  const [invalidar, setInvalidar]= useState(false)
     const navigate = useNavigate()
     const handleRepartirMedallas = async (e)=>{
+      setLoading(true)
+      
         try {
             const idRegistro = crypto.randomUUID()
             const res = await fetch('https://proyecto-backend-william-david-morales.onrender.com/insignias/estudiante',{
@@ -50,7 +55,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
               }) 
               }
               for(let i = 1; rankEstudiantes.length > i ; i++){
-                const resUpdate = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/estudiante/puntaje/${rankEstudiantes[i].id_estudiante}`,{
+                const resUpdate = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiante/puntaje/${rankEstudiantes[i].id_estudiante}`,{
                     method:'PUT',
                     body: JSON.stringify({
                       puntaje:"0"
@@ -63,14 +68,16 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
              
               setVerMedallas(false)
               navigate("/home")
+              
         } catch (error) {
             console.log(error)
         }
-
+        setLoading(false)
     }
 
 
     const handleReiniciarTemporada = async (e)=>{
+      setLoading(true)
         try {
             for(let i = 1; rankEstudiantes.length > i ; i++){
                 const resUpdate = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiante/puntaje/${rankEstudiantes[i].id_estudiante}`,{
@@ -85,9 +92,10 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
               setVerMedallas(false)
               navigate("/home")
         } catch (error) {
-            
+            console.log(error)
         }
-    }
+        setLoading(false)
+      }
 
 
 
@@ -109,7 +117,7 @@ export function Medallas({Logueado, permisoAdmin, verMedallas, rankEstudiantes, 
          <p>La temporada iniciara con todos los puntajes en cero pero no se entregarán medallas</p>
          <Button variant="outline-danger" onClick={handleReiniciarTemporada}>A ello!</Button>
             </div>
-        
+            <LoadingUX show ={loading} setLoading={setLoading}></LoadingUX>
         </div>
         
     )
