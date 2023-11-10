@@ -236,11 +236,11 @@ console.log(cursos)
     controlId="formBasicCheckbox">
     </Form.Group>
     <Button 
-    variant="dark" 
+    variant="outline-light" 
     type='submit'
     disabled={loading === true}
     >
-     {loading ? <CircularProgress size={24} color="inherit"/> : 'log in!'}
+     {loading ? <CircularProgress size={24} color="inherit"/> : 'Entrar'}
     </Button>
 
     

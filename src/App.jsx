@@ -91,7 +91,7 @@ function App() {
     id_estudiante: ""
     }])
     }
-    
+    const [puntajeEstudiante, setPuntajeEstudiante] = useState("")
 
   return (
   
@@ -108,6 +108,7 @@ function App() {
     setPermisoAdmin={setPermisoAdmin}
     setInfoInsignias={setInfoInsignias}
     setInsignias={setInsignias}
+    setPuntajeEstudiante={setPuntajeEstudiante}
    
     /> 
    <Routes>
@@ -146,7 +147,7 @@ function App() {
     element={<Registro_Estudiantes Logueado={logueado}/>}></Route>
     <Route 
     path="/home" 
-    element={<Home user={usuario} Logueado={logueado} insignias={insignias} infoInsignias={infoInsignias} permisoAdmin={permisoAdmin} permisoDocente={permisoDocente}/>}></Route>
+    element={<Home puntajeEstudiante={puntajeEstudiante} user={usuario} Logueado={logueado} insignias={insignias} infoInsignias={infoInsignias} permisoAdmin={permisoAdmin} permisoDocente={permisoDocente}/>}></Route>
     <Route 
     path="/crear/pregunta" 
     element={<Crear_Pregunta Logueado={logueado}/>}></Route>

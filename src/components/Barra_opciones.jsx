@@ -15,7 +15,8 @@ export function Barra_opciones({
   permisoAdmin,
   setPermisoAdmin,
   setInfoInsignias,
-  setInsignias
+  setInsignias,
+  setPuntajeEstudiante
 }) {
 //hook para guardar la lista de estudiantes
 
@@ -30,7 +31,7 @@ if(PermisoDocente===true && permisoAdmin===false)return (
 
 )
 else if(PermisoDocente===false && permisoAdmin===false)return(
-  <Barra_Estudiante setInfoInsignias={setInfoInsignias} setUsuario={setUsuario} setInsignias={setInsignias} setLogueado={setLogueado} user={user} HandleLogout={handleLogout}></Barra_Estudiante>
+  <Barra_Estudiante setInfoInsignias={setInfoInsignias} setUsuario={setUsuario} setInsignias={setInsignias} setLogueado={setLogueado} user={user} HandleLogout={handleLogout} setPuntajeEstudiante={setPuntajeEstudiante}></Barra_Estudiante>
 )
 else if(permisoAdmin===true)return(
   <Barra_Admin setLogueado={setLogueado} HandleLogout={handleLogout} />

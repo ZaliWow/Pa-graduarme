@@ -11,7 +11,7 @@ import { Advertencia_Estudiantes } from './Advertencia_Estudiantes';
 
 
 
-export function Barra_Estudiante({setLogueado, user, setInfoInsignias, setInsignias}) {
+export function Barra_Estudiante({setLogueado, user, setInfoInsignias, setInsignias, setPuntajeEstudiante}) {
 
 
 const [mostrarAdvertencia,setMostrarAdvertencia]= useState(false)
@@ -62,9 +62,9 @@ const [loading, setLoading]= useState(false)
           for(let i=0; res.data.length > i; i++ )
           setRankEstudiantes(rankEstudiantes => [...rankEstudiantes, res.data[i]])
           navigate("/ver/ranking")
-          setVerRank(true)
+          
           setVerExamen(false)
-         
+          setVerRank(true)
           } catch (error) {
             console.log(error)
           }
@@ -86,7 +86,9 @@ const [loading, setLoading]= useState(false)
             contra_estudiante: ""
           },])
         }
-        const  handleHome = (e) =>{
+        const  handleHome = async (e) =>{
+          const res = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiantes/${user.id_estudiante}`)
+          setPuntajeEstudiante(res.data[0].puntaje)
           navigate("/home")
           setVerRank(false)
           setVerExamen(false)
@@ -113,7 +115,7 @@ const [loading, setLoading]= useState(false)
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
               <Nav.Link 
-                onClick={handleHome}>Home</Nav.Link>
+                onClick={handleHome}>Sobre mi</Nav.Link>
               <Nav.Link 
                 onClick={handleRanking}>{loading ? "Loading...": "Ver Ranking"}</Nav.Link>
                <Nav.Link 
@@ -123,9 +125,9 @@ const [loading, setLoading]= useState(false)
             <Navbar.Collapse className="justify-content-end">
                 <Button
                 onClick={handleLogout}
-                  variant="outline-secondary"
+                  variant="outline-light"
                   type='submit'
-                  >Log out</Button>
+                  >Cerrar sesión</Button>
               </Navbar.Collapse>
           </Container>
         </Navbar>

@@ -31,9 +31,9 @@ export function Bienvenido({Logueado, setInfoInsignias, setInsignias}) {
             </Navbar.Brand>
             <Button 
              className="justify-content-end"
-            variant="outline-secondary"
+            variant="light"
             onClick={handleLoguin}
-            >Log in</Button>
+            >Entrar</Button>
           
             </Container>
         </Navbar>

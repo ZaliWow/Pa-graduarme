@@ -6,6 +6,9 @@ import Form from 'react-bootstrap/Form';
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { Puntaje_ganado } from "./puntaje_Ganado";
+
+
 
 export function Hacer_Examen({
     Logueado, 
@@ -35,52 +38,20 @@ const [bodyTwo, setBodyTwo] = useState("")
 const [bodyThree, setBodyThree] = useState("")
 const [bodyFor, setBodyFor] = useState("")
 const [bodyFive, setBodyFive] = useState("")
-
+const [mostrarWin, setMostrarWin] = useState(false)
+const [loading, setLoading] = useState(false)
+const [loadingdos, setLoadingdos]=useState(false)
 const navigate = useNavigate()
+
+
+
+
+
     const handleTerminarExamen = async(e) => {
 
-        setFalsoVerdaderos([
-            {
-                id_pregunta: "",
-                text_pregunta: "",
-                dificultad_pregunta: "",
-                tipo: "",
-                puntaje_pregunta: "",
-                link_foto_pregunta: "",
-                id_pregunta_falso_verdadero: "",
-                respuesta_correcta: ""
-              },
-        ])
-        setMultiples([
-            {
-                id_pregunta: "",
-            text_pregunta: "",
-            dificultad_pregunta: "",
-            tipo: "",
-            puntaje_pregunta: "",
-            link_foto_pregunta: "",
-            id_multiple: "",
-            opcion_a: "",
-            opcion_b: "",
-            opcion_c: "",
-            opcion_d: "",
-            respuesta_correcta: ""
-              },
-        ])
-        setAbiertas([
-            {
-                id_pregunta: "",
-                text_pregunta: "",
-                dificultad_pregunta: "",
-                tipo: "",
-                puntaje_pregunta: "",
-                link_foto_pregunta: "",
-                id_abierta: "",
-                respuesta_correcta: ""},
-        ])
-        setVerExamen(false)
-        navigate('/home')
-
+      setLoading(true)
+      setLoadingdos(false)
+        
         try {
           const idExamen = crypto.randomUUID()
           const idRegistroOne = crypto.randomUUID()
@@ -92,7 +63,7 @@ const navigate = useNavigate()
 
           const puntajeActual = await axios.get(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiantes/${user.id_estudiante}`) 
           var NewPuntaje= parseInt(puntajeActual.data[0].puntaje)
-
+          var puntajeganado = 0
           const result = await fetch('https://proyecto-backend-william-david-morales.onrender.com/datos/examen',{
             method:'POST',
             body: JSON.stringify({
@@ -158,32 +129,42 @@ const navigate = useNavigate()
          
           if(abiertas[1].respuesta_correcta === bodyOne){
             NewPuntaje = NewPuntaje + parseInt(abiertas[1].puntaje_pregunta)
+            puntajeganado=puntajeganado + parseInt(abiertas[1].puntaje_pregunta)
+            
           }
-          console.log(NewPuntaje)
+          
           if(multiples[1].respuesta_correcta === bodyTwo){
             NewPuntaje = NewPuntaje + parseInt(multiples[1].puntaje_pregunta)
+            puntajeganado=puntajeganado + parseInt(multiples[1].puntaje_pregunta)
           } else if(multiples[1].respuesta_correcta !== bodyTwo){
             NewPuntaje = NewPuntaje - parseInt(multiples[1].puntaje_pregunta)
+            puntajeganado=puntajeganado - parseInt(multiples[1].puntaje_pregunta)
           }
-          console.log(NewPuntaje)
+          
           if(multiples[2].respuesta_correcta === bodyThree){
             NewPuntaje = NewPuntaje + parseInt(multiples[2].puntaje_pregunta)
+            puntajeganado=puntajeganado +parseInt(multiples[2].puntaje_pregunta)
           }else if(multiples[2].respuesta_correcta !== bodyThree){
             NewPuntaje = NewPuntaje - parseInt(multiples[2].puntaje_pregunta)
+            puntajeganado=puntajeganado -parseInt(multiples[2].puntaje_pregunta)
           }
-          console.log(NewPuntaje)
+         
           if(falsoVerdaderos[1].respuesta_correcta ===bodyFor){
             NewPuntaje = NewPuntaje + parseInt(falsoVerdaderos[1].puntaje_pregunta)
+            puntajeganado=puntajeganado +parseInt(falsoVerdaderos[1].puntaje_pregunta)
           }else if(falsoVerdaderos[1].respuesta_correcta !==bodyFor){
             NewPuntaje = NewPuntaje - parseInt(falsoVerdaderos[1].puntaje_pregunta)
+            puntajeganado=puntajeganado -parseInt(falsoVerdaderos[1].puntaje_pregunta)
           }
-          console.log(NewPuntaje)
+      
           if(falsoVerdaderos[2].respuesta_correcta ===bodyFive){
             NewPuntaje = NewPuntaje + parseInt(falsoVerdaderos[2].puntaje_pregunta)
+            puntajeganado=puntajeganado + parseInt(falsoVerdaderos[2].puntaje_pregunta)
           }else if(falsoVerdaderos[2].respuesta_correcta !==bodyFive){
             NewPuntaje = NewPuntaje - parseInt(falsoVerdaderos[2].puntaje_pregunta)
+            puntajeganado=puntajeganado - parseInt(falsoVerdaderos[2].puntaje_pregunta)
           }
-          console.log(NewPuntaje)
+         
              
           const resUpdate = await fetch(`https://proyecto-backend-william-david-morales.onrender.com/registro/estudiante/puntaje/${user.id_estudiante}`,{
               method:'PUT',
@@ -192,7 +173,7 @@ const navigate = useNavigate()
               }),
               headers:{"Content-Type":"application/json"}
             })
-            console.log(resUpdate.data)
+          
           
           setRankEstudiantes([{
             id_estudiante: "",
@@ -205,7 +186,8 @@ const navigate = useNavigate()
            
            
          
-
+          setMostrarWin(puntajeganado)
+          setLoadingdos(true)
           
         } catch (error) {
           console.log(error)
@@ -260,6 +242,11 @@ const proba = ()=> {
     
     if(verExamen===true )return(
         <div >
+
+<div>
+  <Puntaje_ganado setVerExamen={setVerExamen} setMultiples={setMultiples} setAbiertas={setAbiertas} setFalsoVerdaderos={setFalsoVerdaderos} setMostrarWin={setMostrarWin} loadingdos={loadingdos} show ={loading} setLoading={setLoading} mostrarWin={mostrarWin} ></Puntaje_ganado>
+</div>
+
           <div className="estilobotoncambioexamen">
           <Button variant="outline-danger" onClick={handleResetExamen}>Oops, Elegir otra dificultad</Button>
           </div>
@@ -369,7 +356,7 @@ const proba = ()=> {
           
 </Form>
         </div>
-        
+     
         <div className="estiloExamen">
         <img   src={falsoVerdaderos[1].link_foto_pregunta} alt="" />
             <h6>{falsoVerdaderos[1].text_pregunta}</h6>
@@ -398,15 +385,17 @@ const proba = ()=> {
    
     
     <br />
+    
 </div>
 
 </div>
+
 <br />
-<div className='footer'>
+        <div className='footer'>
         <br />
        <p>&copy; 2023 Your Company. All rights reserved.</p>
     
        </div>
-        </div>
+</div>
     )  
 }

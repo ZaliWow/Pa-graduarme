@@ -112,7 +112,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
         <Nav.Link 
-          onClick={handleHome }>Home</Nav.Link>
+          onClick={handleHome }>Principal</Nav.Link>
         <Nav.Link 
           onClick={handleCrearPregunta}>Crear Pregunta</Nav.Link>
         <Nav.Link 
@@ -126,7 +126,7 @@ export function Barra_Docente({setLogueado, HandleLogout}) {
       </Navbar.Collapse>
       <Navbar.Collapse className="justify-content-end">
           <Button
-            variant="outline-secondary"
+            variant="outline-light"
             onClick={handleLogout}
             >Log out</Button>
         </Navbar.Collapse>
