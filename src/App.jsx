@@ -17,6 +17,7 @@ import { Docentes } from './components/Docentes';
 import { Admin_cursos } from './components/Admin_cursos';
 import { Gestion_estudiantes } from './components/Gestion_estudiantes';
 import { Medallas } from './components/medallas';
+import {Update_preguntas} from './components/Update_preguntas'
 
 
 
@@ -163,6 +164,10 @@ function App() {
     <Route
     path='/crear/pregunta/respuesta/abierta'
     element={<Crear_respuesta_abierta></Crear_respuesta_abierta>}>
+    </Route>
+    <Route
+    path='revisar/preguntas'
+    element={<Update_preguntas logueado={logueado}></Update_preguntas>}>
     </Route>
     <Route
     path='/curso'
