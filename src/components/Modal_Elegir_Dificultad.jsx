@@ -62,6 +62,13 @@ export function Modal_Elegir_Dificultad({
             const res2 = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/update/multiples/Media') 
             for(let i=0; res2.data.length > i; i++ ){
             setPreguntasMultiples(preguntasMultiples =>[...preguntasMultiples, res2.data[i]])}
+            const res3 = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/update/abiertas/Media') 
+            for(let i=0; res3.data.length > i; i++ ){
+            setPreguntasAbiertas(preguntasAbiertas =>[...preguntasAbiertas, res3.data[i]])}
+           
+           
+           
+           
             navigate("/revisar/preguntas")
             setVerBank(true)
             handleClose()
@@ -81,6 +88,10 @@ export function Modal_Elegir_Dificultad({
             const res2 = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/update/multiples/Dificil') 
             for(let i=0; res2.data.length > i; i++ ){
             setPreguntasMultiples(preguntasMultiples =>[...preguntasMultiples, res2.data[i]])}
+            const res3 = await axios.get('https://proyecto-backend-william-david-morales.onrender.com/update/abiertas/Dificil') 
+            for(let i=0; res3.data.length > i; i++ ){
+            setPreguntasAbiertas(preguntasAbiertas =>[...preguntasAbiertas, res3.data[i]])}
+           
             navigate("/revisar/preguntas")     
             setVerBank(true)
             handleClose()
@@ -93,6 +104,8 @@ export function Modal_Elegir_Dificultad({
     const handleClose = ()=>{
         setMostrarModal(false)
     }
+
+    
     return(
         <>
         <Modal 
